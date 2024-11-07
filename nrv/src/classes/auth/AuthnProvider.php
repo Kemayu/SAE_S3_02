@@ -8,7 +8,19 @@ class AuthnProvider
     //Fonction permettant de se connecter. Elle prend en parametre le mail et le mot de passe de l'utilisateur
     //et renvoie true si la connection a ete effectue
     public static function signin(string $email, string $password): bool {
-        return true;
+        $repo = \iutnc\nrv\repository\NrvRepository::getInstance();
+        $result = $repo -> verifIdRegister($email);
+        if($result[0] == false){
+            if(password_verify($password,$result[1])){
+                $user = new User($repo->getIdUser($email),$email,$repo->getTelUser($email),$repo->getRoleUser($email));
+                $_SESSION['user'] = serialize($user);
+                return true;
+            }else{
+                throw new exception\AuthnException("echec d'authentification");
+            }
+        }else{
+            throw new exception\AuthnException("pas réussi à se connecter");
+        }
     }
     //Fonction permettant d'enregistrer un compte. Elle prend en parametre le mail et le mot de passe de l'utilisateur
     //et renvoie true si l'enregistrement a ete effectue
