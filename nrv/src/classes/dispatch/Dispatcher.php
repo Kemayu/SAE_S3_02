@@ -27,6 +27,14 @@ class Dispatcher
                 $action = new act\DefaultAction();
                 $html = $action->execute();
                 break;
+            case 'register' : 
+                $action = new act\RegisterAction();
+                $html = $action->execute();
+                break;
+            case 'signin' : 
+                $action = new act\SignInAction();
+                $html = $action->execute();
+                break;
             case 'disconnect':
                 $action = new act\DisconnectAction();
                 $html = $action->execute();
@@ -50,6 +58,8 @@ class Dispatcher
     <ul>
          <li><a href="?action=default">Accueil</a></li>
          <li>-----------</li>
+         <li><a href="?action=register">s'enregistrer</a></li>
+         <li><a href="?action=signin">se connecter</a></li>
          <li><a href="?action=disconnect">Se deconnecter</a></li>
     </ul>
     $html

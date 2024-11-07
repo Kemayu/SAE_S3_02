@@ -32,5 +32,34 @@ class NrvRepository{
         self::$config = [ 'database'=> $conf["database"],'user'=> $conf['username'], 'pass'=> $conf['password'],'host' =>$conf['host'],"drive"=>$conf['drive']];
     }
 
+     //Fonction qui donne le mot de passe si l'email existe dans la base de donnees
+     public function verifIdRegister(String $email) : array{
+        $sql ="select count(*) from utilisateur where EMAIL_UTILISATEUR = :email ";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':email',$email);
+        $stmt->execute();
+        $result = $stmt->fetchColumn(); 
+        if ($result == 0){
+            return [true,null];
+        }
+        $stmt = $this->pdo->prepare("select PASSWORD_UTILISATEUR from utilisateur where EMAIL_UTILISATEUR = :email");
+        $stmt->bindParam(':email',$email);
+        $stmt->execute();
+        $passwd = $stmt->fetchColumn();
+        return[false,$passwd];
+    }
+
+    //Fonction pour s'enregistrer
+    public function register(String $name, String $tel, String $email,string $password):void{
+        $sql ="insert into utilisateur(NOM_UTILISATEUR,EMAIL_UTILISATEUR,TELEPHONE_UTILISATEUR,PASSWORD_UTILISATEUR,DROIT_UTILISATEUR) values(:nom,:email,:tel,:pwd,:role)";
+        $role = 1;
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':nom',$name);
+        $stmt->bindParam(':email',$email);
+        $stmt->bindParam(':tel',$tel);
+        $stmt->bindParam(':pwd',$password);
+        $stmt->bindParam(':role',$role);
+        $stmt->execute();
+    }
 
 }
