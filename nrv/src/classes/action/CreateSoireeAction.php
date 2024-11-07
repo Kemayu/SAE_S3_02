@@ -35,7 +35,6 @@ class CreateSoireeAction extends Action
            END;
 
         } else {
-            echo $_POST['idlieu'];
             NrvRepository::getInstance()->createSoiree($_POST['name'],$_POST['date'], $_POST['thematique'], $_POST['horraire'],$_POST['idlieu']);
             $html = "Soirée Crée";
 

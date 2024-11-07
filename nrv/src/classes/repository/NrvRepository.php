@@ -109,8 +109,8 @@ class NrvRepository{
         return $pgrm;
     }
 
-    public function createsoiree(String $name, String $thematique, String $date, String $horraire):void{
-        $sql ="insert into Soiree(NOM_SOIREE,DATE_SOIREE,THEMATIQUE,HORRAIRE_DEBUT) values(:nom,:thematique,:date,:horraire)";
+    public function createsoiree(String $name, String $thematique, String $date, String $horraire, int $idlieu):void{
+        $sql ="insert into Soiree(NOM_SOIREE,DATE_SOIREE,THEMATIQUE,HORAIRE_DEBUT,ID_LIEU) values(:nom,:thematique,:date,:horraire, :idlieu)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindParam(':nom',$name);
         $stmt->bindParam(':date',$date);
@@ -118,7 +118,8 @@ class NrvRepository{
         $stmt->bindParam(':horraire',$horraire);
         $stmt->bindParam(':idlieu',$idlieu);
         $stmt->execute();
-    }
+        }
+
     public function getIdLieu() : array{
         $sql = "select ID_LIEU,NOM_LIEU from LIEU";
         $stmt = $this->pdo->prepare($sql);
