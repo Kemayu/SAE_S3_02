@@ -12,13 +12,11 @@ class RenderLieu implements renderer{
     {
         return "
         <div>
-<<<<<<< HEAD
             <h3 id='nom-lieu'>{$this->lieu->nom}</h3>
             <p id='adresse-lieu'>{$this ->lieu->adresse} </p>
             <p>{$this->lieu->place_debout>}</p>
             <p>{$this->lieu->place_assises>}</p>
             <img src='{$this->lieu->image}' alt='Affiche' width='300' height='200'>
->>>>>>> 41fb9f9fb6a4de939ef0c305a3a1a97ce5d80495
         </div>
         ";
     }
