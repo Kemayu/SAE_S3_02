@@ -96,8 +96,21 @@ class NrvRepository{
         $id = $stmt->fetchColumn();
         return $id;
     }
-    public function createSoiree(String $name, String $date, String $thematique, String $horraire, int $idlieu):void{
-        $sql ="insert into SOIREE(NOM_SOIREE,DATE_SOIREE,THEMATIQUE,HORAIRE_DEBUT, ID_LIEU) values(:nom,:date,:thematique,:horraire,:idlieu)";
+    //
+    public function findProgramSorted(String $val): array {
+        $stmt = $this ->pdo->prepare("select * from spectacle inner join soiree_spectacle on spectacle.id_spectacle=soiree_spectacle.id_spectacle
+        inner join soiree on soiree_spectacle.id_soiree=soiree.id_soiree
+        inner join lieu_soiree on soiree.id_lieu=lieu_soiree.id_lieu
+        inner join lieu on lieu_soiree.id_lieu=lieu.id_lieu
+        ORDER BY ? ASC");
+        $stmt->bindParam(1,$val);
+        $stmt->execute();
+        $pgrm = $stmt->fetchAll();
+        return $pgrm;
+    }
+
+    public function createsoiree(String $name, String $thematique, String $date, String $horraire):void{
+        $sql ="insert into Soiree(NOM_SOIREE,DATE_SOIREE,THEMATIQUE,HORRAIRE_DEBUT) values(:nom,:thematique,:date,:horraire)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindParam(':nom',$name);
         $stmt->bindParam(':date',$date);
@@ -112,5 +125,24 @@ class NrvRepository{
         $stmt->execute();
         $infos = $stmt->fetchAll();
         return $infos;
+    }
 
-}}
+
+    public function createSpectacle(String $date, String $h, int $duree, int $tarifs,String $e, String $t,String $d,String $i,String $s):void{
+        $sql ="insert into spectacle(DATE_SPECTACLE , HORAIRE_SPECTACLE, DUREE_SPECTACLE , TARIF_SPECTACLE , EXTRAIT_SPECTACLE , TITRE_SPECTACLE , DESCRIPTION_SPECTACLE, IMAGE_SPECTACLE ,STYLE_MUSIQUE) values(:date,:horraire,:duree,:tarifs,:extrait,:titre,:description,:image,:style)";
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->bindParam(':date',$date);
+        $stmt->bindParam(':horraire',$h);
+        $stmt->bindParam(':duree',$duree);
+        $stmt->bindParam(':tarifs',$tarifs);
+        $stmt->bindParam(':extrait',$e);
+        $stmt->bindParam(':titre',$t);
+        $stmt->bindParam(':description',$d);
+        $stmt->bindParam(':image',$i);
+        $stmt->bindParam(':style',$s);
+
+        $stmt->execute();
+
+    }
+}
