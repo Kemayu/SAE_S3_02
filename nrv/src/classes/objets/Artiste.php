@@ -1,17 +1,11 @@
 <?php
 namespace iutnc\nrv\objet ;
 use iutnc\nrv\exception as exception;
-class Soirée{
+class Artiste{
     protected String $nom;
-    protected String $date;
-    protected String $thematique;
-    protected String $heure_debut;
 
-    public function __construct(String $n,String $d,String $t,String h_d,){
+    public function __construct(String $n){
         $this -> nom = $n;
-        $this -> date = $d;
-        $this -> thematique = $t;
-        $this -> heure_debut = $h_d;
     }
 
     public function __get($property): mixed
