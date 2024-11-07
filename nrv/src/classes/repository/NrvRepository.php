@@ -87,4 +87,17 @@ class NrvRepository{
         $id = $stmt->fetchColumn();
         return $id;
     }
+
+    //
+    public function findProgramSorted(String $val): String {
+        $stmt = $this ->pdo->prepare("select * from spectacle inner join soiree_spectacle on spectacle.idspectacle=soiree_spectacle.idspectacle
+        inner join soiree on soiree_spectacle.idsoiree=soiree.idsoiree
+        inner join lieu_soiree on soiree.idlieu=lieu_soiree.idlieu
+        inner join lieu on lieu_soiree.idlieu=lieu.idlieu
+        ORDER BY ?");
+        $stmt->bindParam(1,$val);
+        $stmt->execute();
+        $pgrm = $stmt->fetchColumn();
+        return $pgrm;
+    }
 }
