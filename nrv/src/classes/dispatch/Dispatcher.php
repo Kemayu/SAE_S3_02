@@ -21,25 +21,21 @@ class Dispatcher
     //Pour chaque action, on creer un objet de l'action correspondante et on utilise sa methode execute()
     public function run(): void
     {
-        $html = '';
         switch ($this->action) {
-            case 'default':
-                $action = new act\DefaultAction();
-                $html = $action->execute();
-                break;
             case 'register' : 
                 $action = new act\RegisterAction();
-                $html = $action->execute();
                 break;
             case 'signin' : 
                 $action = new act\SignInAction();
-                $html = $action->execute();
                 break;
             case 'disconnect':
                 $action = new act\DisconnectAction();
-                $html = $action->execute();
+                break;
+            default :
+                $action = new act\DefaultAction();
                 break;
         }
+        $html = $action->execute();
         $this->renderPage($html);
     }
 
