@@ -27,39 +27,6 @@ class Dispatcher
                 $action = new act\DefaultAction();
                 $html = $action->execute();
                 break;
-            case 'playlist':
-                $action = new act\DisplayPlaylistAction();
-                $html = $action->execute();
-                break;
-            case 'une-playlist' : 
-                $action = new act\DisplayUnePlaylistAction();
-                $html = $action->execute();
-                break;
-            case 'add-playlist':
-                $action = new act\AddPlaylistAction();
-                $html = $action->execute();
-                break;
-            case 'add-track':
-                $action = new act\AddTrackAction();
-                $html = $action->execute();
-                break;
-            case 'signin' : 
-                $action = new act\SignInAction();
-                $html = $action->execute();
-                break;
-            case 'register' : 
-                $action = new act\RegisterAction();
-                $html = $action->execute();
-                break;
-            case 'add-track-to-playlist' :
-                $action = new act\AddTrackPlaylistAction();
-                $html = $action->execute();
-                break;
-            case 'disconnect':
-                $action = new act\DisconnectAction();
-                $html = $action->execute();
-                break;
-            
         }
         $this->renderPage($html);
     }
