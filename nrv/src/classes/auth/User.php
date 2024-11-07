@@ -7,13 +7,15 @@ class User{
     //Un utilisateur possede un identifiant, un email et un role. Nous n'avons pas acces a son mot de passe
     private int $id;
     private string $email;
+    private string $NumTel;
     private int $role;
     
     //initialisation des attributs
-    public function __construct(int $id, string $mail,int $role)
+    public function __construct(int $id, string $mail, string $tel, int $role)
     {
         $this->id = $id;
         $this->email = $mail;
+        $this->NumTel = $tel;
         $this->role = $role;
     }
 
