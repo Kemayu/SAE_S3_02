@@ -1,4 +1,6 @@
 <?php
+namespace iutnc\nrv\objet ;
+use iutnc\nrv\exception as exception;
 class Spectacle{
     protected String $titre;
     protected String $description;
