@@ -1,6 +1,6 @@
 <?php
 namespace iutnc\nrv\repository;
-use iutnc\nrv\auth as auth;
+use iutnc\nrv\objets as objets;
 
 //Classe gerant les interactions avec la base de donnees
 class NrvRepository{
@@ -48,6 +48,15 @@ class NrvRepository{
         $stmt->execute();
         $passwd = $stmt->fetchColumn();
         return[false,$passwd];
+    }
+
+    public function getSpectacleById(int $idSpec) :objets\Spectacle{
+        $stmt = $this->pdo->prepare("select * from spectacle where id_spectacle = :idS");
+        $stmt->bindParam(':idS',$idSpec);
+        $stmt->execute();
+        $spectacle = $stmt->fetch();
+        $s = new objets\Spectacle($spectacle["TITRE_SPECTACLE"],$spectacle["DESCRIPTION_SPECTACLE"],$spectacle["IMAGE_SPECTACLE"],$spectacle["EXTRAIT_SPECTACLE"],$spectacle["DATE_SPECTACLE"],$spectacle["HORAIRE_SPECTACLE"],$spectacle["DUREE_SPECTACLE"],$spectacle["STYLE_MUSIQUE"],$spectacle["TARIF_SPECTACLE"]);
+        return $s;
     }
 
     //Fonction pour s'enregistrer

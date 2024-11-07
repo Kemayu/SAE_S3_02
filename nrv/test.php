@@ -1,7 +1,9 @@
 <?php
 require_once 'vendor/autoload.php';
-use iutnc\nrv\objets as objets;
+
 use iutnc\nrv\render as render;
-$s = new objets\Spectacle("nrv","spectacle origine","image.png","extrait.mp3","12/04/24","16h",2,"rap",34);
-$r = new render\RenderSpectacle($s);
+\iutnc\nrv\repository\NrvRepository::setConfig(__DIR__ . '/config/nrv.db.ini');
+$s = \iutnc\nrv\repository\NrvRepository::getInstance();
+$spec = $s-> getSpectacleById(1);
+$r = new render\RenderSpectacle($spec);
 echo $r->render();
