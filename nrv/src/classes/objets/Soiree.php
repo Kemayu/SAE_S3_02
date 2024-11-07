@@ -7,7 +7,7 @@ class Soirée{
     protected String $thematique;
     protected String $heure_debut;
 
-    public function __construct(String $n,String $d,String $t,String h_d,){
+    public function __construct(String $n,String $d,String $t,String $h_d,){
         $this -> nom = $n;
         $this -> date = $d;
         $this -> thematique = $t;
