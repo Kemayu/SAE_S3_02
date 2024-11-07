@@ -96,7 +96,7 @@ class NrvRepository{
         $id = $stmt->fetchColumn();
         return $id;
     }
-<<<<<<< HEAD
+
 
     //
     public function findProgramSorted(String $val): String {
@@ -109,7 +109,7 @@ class NrvRepository{
         $stmt->execute();
         $pgrm = $stmt->fetchColumn();
         return $pgrm;
-=======
+    }
     public function createsoiree(String $name, String $thematique, String $date, String $horraire):void{
         $sql ="insert into Soiree(NOM_SOIREE,DATE_SOIREE,THEMATIQUE,HORRAIRE_DEBUT) values(:nom,:thematique,:date,:horraire)";
         $stmt = $this->pdo->prepare($sql);
@@ -135,6 +135,6 @@ class NrvRepository{
         $stmt->bindParam(':style',$s);
 
         $stmt->execute();
->>>>>>> 156170a6e34072fea2721c4bc5cf14df063dc549
+
     }
 }
