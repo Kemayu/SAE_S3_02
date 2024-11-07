@@ -72,10 +72,10 @@ class Dispatcher
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Deefy</title>
+    <title>NRV</title>
 </head>
 <body>
-   <h1>Deefy</h1>
+   <h1>NRV</h1>
    <ul>
          <li><a href="?action=default">Accueil</a></li>
          <li><a> . . . <a></li>

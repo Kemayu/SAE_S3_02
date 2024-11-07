@@ -8,7 +8,7 @@ class AuthnProvider
     //Fonction permettant de se connecter. Elle prend en parametre le mail et le mot de passe de l'utilisateur
     //et renvoie true si la connection a ete effectue
     public static function signin(string $email, string $password): bool {
-        $repo = \iutnc\deefy\repository\DeefyRepository::getInstance();
+        $repo = \iutnc\Nrv\repository\NrvRepository::getInstance();
         $result = $repo -> verifIdRegister($email);
         if($result[0] == false){
             if(password_verify($password,$result[1])){
@@ -27,7 +27,7 @@ class AuthnProvider
     public static function register(string $email,string $password): bool{
             if($email=== filter_var($email, FILTER_SANITIZE_EMAIL)){
                 if (strpos($email, "@") !== false and strpos($email, ".") !== false ) {
-                    $repo = \iutnc\deefy\repository\DeefyRepository::getInstance();
+                    $repo = \iutnc\Nrv\repository\NrvRepository::getInstance();
                     if ($repo -> verifIdRegister($email)[0]){
                         $repo->register($email,password_hash($password, PASSWORD_BCRYPT));
                         return true;
