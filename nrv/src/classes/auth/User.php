@@ -22,11 +22,7 @@ class User{
     //Getter des attributs
     public function __get($property): mixed
     {
-        if(property_exists($this, $property)) {
-            return $this->$property;
-        } else {
-            throw new exception\InvalidPropertyNameException($property);
-        }
+        return property_exists($this, $property) ? $this->$property : throw new exception\InvalidPropertyNameException($property);
     }
 
 }
