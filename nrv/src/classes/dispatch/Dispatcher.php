@@ -27,6 +27,10 @@ class Dispatcher
                 $action = new act\DefaultAction();
                 $html = $action->execute();
                 break;
+            case 'disconnect':
+                $action = new act\DisconnectAction();
+                $html = $action->execute();
+                break;
         }
         $this->renderPage($html);
     }
@@ -45,6 +49,8 @@ class Dispatcher
     <h1>NRV</h1>
     <ul>
          <li><a href="?action=default">Accueil</a></li>
+         <li>-----------</li>
+         <li><a href="?action=disconnect">Se deconnecter</a></li>
     </ul>
     $html
 </body>
