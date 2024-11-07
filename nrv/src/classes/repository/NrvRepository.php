@@ -3,10 +3,10 @@ namespace iutnc\nrv\repository;
 use iutnc\nrv\auth as auth;
 
 //Classe gerant les interactions avec la base de donnees
-class DeefyRepository{
+class NrvRepository{
     //Attributs
     private \PDO $pdo;
-    private static ?DeefyRepository $instance = null; private static array $config = [ ];
+    private static ?NrvRepository $instance = null; private static array $config = [ ];
 
     //initialisation des attributs
     private function __construct(array $conf) {
@@ -15,9 +15,9 @@ class DeefyRepository{
     }
 
     //Getter pour l'instance
-    public static function getInstance(): DeefyRepository{
+    public static function getInstance(): NrvRepository{
         if (is_null(self::$instance)) {
-            self::$instance = new DeefyRepository(self::$config);
+            self::$instance = new NrvRepository(self::$config);
         }
         return self::$instance;
     }
