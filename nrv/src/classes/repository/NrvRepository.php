@@ -99,15 +99,15 @@ class NrvRepository{
 
 
     //
-    public function findProgramSorted(String $val): String {
-        $stmt = $this ->pdo->prepare("select * from spectacle inner join soiree_spectacle on spectacle.idspectacle=soiree_spectacle.idspectacle
-        inner join soiree on soiree_spectacle.idsoiree=soiree.idsoiree
-        inner join lieu_soiree on soiree.idlieu=lieu_soiree.idlieu
-        inner join lieu on lieu_soiree.idlieu=lieu.idlieu
-        ORDER BY ?");
+    public function findProgramSorted(String $val): array {
+        $stmt = $this ->pdo->prepare("select * from spectacle inner join soiree_spectacle on spectacle.id_spectacle=soiree_spectacle.id_spectacle
+        inner join soiree on soiree_spectacle.id_soiree=soiree.id_soiree
+        inner join lieu_soiree on soiree.id_lieu=lieu_soiree.id_lieu
+        inner join lieu on lieu_soiree.id_lieu=lieu.id_lieu
+        ORDER BY ? ASC");
         $stmt->bindParam(1,$val);
         $stmt->execute();
-        $pgrm = $stmt->fetchColumn();
+        $pgrm = $stmt->fetchAll();
         return $pgrm;
     }
     public function createsoiree(String $name, String $thematique, String $date, String $horraire):void{

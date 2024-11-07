@@ -37,6 +37,9 @@ class Dispatcher
             case 'add-soiree':
                 $action = new act\CreateSoiree();
                 break;
+            case 'Display-Sorted':
+                $action = new act\DisplayProgSorted();
+                break;
             default :
                 $action = new act\DefaultAction();
                 break;
@@ -65,6 +68,8 @@ class Dispatcher
          <li><a href="?action=signin">se connecter</a></li>
          <li><a href="?action=disconnect">Se deconnecter</a></li>
          <li><a href="?action=create-spectacle">Creer spectacle</a></li>
+         <li>-----------</li>
+         <li><a href="?action=Display-Sorted">Afficher le programme de manière triée</a></li>
          
     </ul>
     $html
