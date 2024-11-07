@@ -32,7 +32,7 @@ class Dispatcher
                 $action = new act\DisconnectAction();
                 break;
             case 'add-soiree':
-                $action = new act\CreateSoiree();
+                $action = new act\CreateSoireeAction();
                 break;
             default :
                 $action = new act\DefaultAction();
