@@ -10,9 +10,9 @@ class Spectacle{
     protected String $horraireSpectacle;
     protected int $duree;
     protected String $styleMusique;
-    protected String $tarifs;
+    protected Int $tarifs;
 
-    public function __construct(String $t,String $d,String $i,String $e,String $date,String $h,int $duree,String $s,String $tarifs){
+    public function __construct(String $t,String $d,String $i,String $e,String $date,String $h,int $duree,String $s,int $tarifs){
         $this -> titre = $t;
         $this -> description = $d;
         $this -> image = $i;
