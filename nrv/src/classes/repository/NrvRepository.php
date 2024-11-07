@@ -96,6 +96,15 @@ class NrvRepository{
         $id = $stmt->fetchColumn();
         return $id;
     }
+    public function createsoiree(String $name, String $thematique, String $date, String $horraire):void{
+        $sql ="insert into Soiree(NOM_SOIREE,DATE_SOIREE,THEMATIQUE,HORRAIRE_DEBUT) values(:nom,:thematique,:date,:horraire)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':nom',$name);
+        $stmt->bindParam(':thematique',$thematique);
+        $stmt->bindParam(':date',$date);
+        $stmt->bindParam(':horraire',$horraire);
+        $stmt->execute();
+    }
 
     public function createSpectacle(String $date, String $h, int $duree, int $tarifs,String $e, String $t,String $d,String $i,String $s):void{
         $sql ="insert into spectacle(DATE_SPECTACLE , HORAIRE_SPECTACLE, DUREE_SPECTACLE , TARIF_SPECTACLE , EXTRAIT_SPECTACLE , TITRE_SPECTACLE , DESCRIPTION_SPECTACLE, IMAGE_SPECTACLE ,STYLE_MUSIQUE) values(:date,:horraire,:duree,:tarifs,:extrait,:titre,:description,:image,:style)";
