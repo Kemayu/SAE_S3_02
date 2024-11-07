@@ -35,7 +35,7 @@ class Dispatcher
                 $action = new act\CreateSpectacleAction();
                 break;
             case 'add-soiree':
-                $action = new act\CreateSoiree();
+                $action = new act\CreateSoireeAction();
                 break;
             case 'Display-Sorted':
                 $action = new act\DisplayProgSorted();
