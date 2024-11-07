@@ -3,15 +3,17 @@ namespace iutnc\nrv\objet ;
 use iutnc\nrv\exception as exception;
 class Soirée{
     protected String $nom;
-    protected String $date;
-    protected String $thematique;
-    protected String $heure_debut;
+    protected String $email;
+    protected String $telephone;
+    protected int $droit;
+    protected String $password;
 
-    public function __construct(String $n,String $d,String $t,String h_d,){
+    public function __construct(String $n,String $e,String $t,int d,String p){
         $this -> nom = $n;
-        $this -> date = $d;
+        $this -> email = $e;
         $this -> thematique = $t;
-        $this -> heure_debut = $h_d;
+        $this -> droit = $d;
+        $this -> password = $p;
     }
 
     public function __get($property): mixed
