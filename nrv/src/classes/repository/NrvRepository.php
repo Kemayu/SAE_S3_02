@@ -1,6 +1,6 @@
 <?php
 namespace iutnc\nrv\repository;
-use iutnc\nrv\auth as auth;
+use iutnc\nrv\objets as objets;
 
 //Classe gerant les interactions avec la base de donnees
 class NrvRepository{
@@ -50,6 +50,15 @@ class NrvRepository{
         return[false,$passwd];
     }
 
+    public function getSpectacleById(int $idSpec) :objets\Spectacle{
+        $stmt = $this->pdo->prepare("select * from spectacle where id_spectacle = :idS");
+        $stmt->bindParam(':idS',$idSpec);
+        $stmt->execute();
+        $spectacle = $stmt->fetch();
+        $s = new objets\Spectacle($spectacle["TITRE_SPECTACLE"],$spectacle["DESCRIPTION_SPECTACLE"],$spectacle["IMAGE_SPECTACLE"],$spectacle["EXTRAIT_SPECTACLE"],$spectacle["DATE_SPECTACLE"],$spectacle["HORAIRE_SPECTACLE"],$spectacle["DUREE_SPECTACLE"],$spectacle["STYLE_MUSIQUE"],$spectacle["TARIF_SPECTACLE"]);
+        return $s;
+    }
+
     //Fonction pour s'enregistrer
     public function register(String $name, String $tel, String $email,string $password):void{
         $sql ="insert into utilisateur(NOM_UTILISATEUR,EMAIL_UTILISATEUR,TELEPHONE_UTILISATEUR,PASSWORD_UTILISATEUR,DROIT_UTILISATEUR) values(:nom,:email,:tel,:pwd,:role)";
@@ -87,6 +96,7 @@ class NrvRepository{
         $id = $stmt->fetchColumn();
         return $id;
     }
+<<<<<<< HEAD
 
     //
     public function findProgramSorted(String $val): String {
@@ -99,5 +109,32 @@ class NrvRepository{
         $stmt->execute();
         $pgrm = $stmt->fetchColumn();
         return $pgrm;
+=======
+    public function createsoiree(String $name, String $thematique, String $date, String $horraire):void{
+        $sql ="insert into Soiree(NOM_SOIREE,DATE_SOIREE,THEMATIQUE,HORRAIRE_DEBUT) values(:nom,:thematique,:date,:horraire)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':nom',$name);
+        $stmt->bindParam(':thematique',$thematique);
+        $stmt->bindParam(':date',$date);
+        $stmt->bindParam(':horraire',$horraire);
+        $stmt->execute();
+    }
+
+    public function createSpectacle(String $date, String $h, int $duree, int $tarifs,String $e, String $t,String $d,String $i,String $s):void{
+        $sql ="insert into spectacle(DATE_SPECTACLE , HORAIRE_SPECTACLE, DUREE_SPECTACLE , TARIF_SPECTACLE , EXTRAIT_SPECTACLE , TITRE_SPECTACLE , DESCRIPTION_SPECTACLE, IMAGE_SPECTACLE ,STYLE_MUSIQUE) values(:date,:horraire,:duree,:tarifs,:extrait,:titre,:description,:image,:style)";
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->bindParam(':date',$date);
+        $stmt->bindParam(':horraire',$h);
+        $stmt->bindParam(':duree',$duree);
+        $stmt->bindParam(':tarifs',$tarifs);
+        $stmt->bindParam(':extrait',$e);
+        $stmt->bindParam(':titre',$t);
+        $stmt->bindParam(':description',$d);
+        $stmt->bindParam(':image',$i);
+        $stmt->bindParam(':style',$s);
+
+        $stmt->execute();
+>>>>>>> 156170a6e34072fea2721c4bc5cf14df063dc549
     }
 }

@@ -31,6 +31,12 @@ class Dispatcher
             case 'disconnect':
                 $action = new act\DisconnectAction();
                 break;
+            case 'create-spectacle' :
+                $action = new act\CreateSpectacleAction();
+                break;
+            case 'add-soiree':
+                $action = new act\CreateSoiree();
+                break;
             default :
                 $action = new act\DefaultAction();
                 break;
@@ -54,9 +60,12 @@ class Dispatcher
     <ul>
          <li><a href="?action=default">Accueil</a></li>
          <li>-----------</li>
+         <li><a href="?action=add-soiree">Crée la soirée</a></li>
          <li><a href="?action=register">s'enregistrer</a></li>
          <li><a href="?action=signin">se connecter</a></li>
          <li><a href="?action=disconnect">Se deconnecter</a></li>
+         <li><a href="?action=create-spectacle">Creer spectacle</a></li>
+         
     </ul>
     $html
 </body>

@@ -12,9 +12,7 @@ class RenderArtiste implements renderer{
     {
         return "
         <div>
-<<<<<<< HEAD
             <h2>{$this->art->nom}</h2>
->>>>>>> 41fb9f9fb6a4de939ef0c305a3a1a97ce5d80495
         </div>
         ";
     }

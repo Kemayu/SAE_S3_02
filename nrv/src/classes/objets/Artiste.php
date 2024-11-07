@@ -1,5 +1,5 @@
 <?php
-namespace iutnc\nrv\objet ;
+namespace iutnc\nrv\objets ;
 use iutnc\nrv\exception as exception;
 class Artiste{
     protected String $nom;

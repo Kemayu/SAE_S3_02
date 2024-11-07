@@ -1,5 +1,5 @@
 <?php
-namespace iutnc\nrv\objet ;
+namespace iutnc\nrv\objets ;
 use iutnc\nrv\exception as exception;
 class Soirée{
     protected String $nom;
@@ -8,7 +8,7 @@ class Soirée{
     protected int $droit;
     protected String $password;
 
-    public function __construct(String $n,String $e,String $t,int d,String p){
+    public function __construct(String $n,String $e,String $t,int $d,String $p){
         $this -> nom = $n;
         $this -> email = $e;
         $this -> thematique = $t;
