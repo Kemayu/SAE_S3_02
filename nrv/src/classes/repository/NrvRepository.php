@@ -39,6 +39,7 @@ class NrvRepository{
         $stmt->bindParam(':email',$email);
         $stmt->execute();
         $result = $stmt->fetchColumn(); 
+
         if ($result == 0){
             return [true,null];
         }
@@ -61,5 +62,29 @@ class NrvRepository{
         $stmt->bindParam(':role',$role);
         $stmt->execute();
     }
+    //Getter de l'id de l'utilisateur
+    public function getIdUser(String $email):int{
+        $stmt = $this ->pdo->prepare("select id_utilisateur from utilisateur where email_utilisateur = ?");
+        $stmt->bindParam(1,$email);
+        $stmt->execute();
+        $id = $stmt->fetchColumn();
+        return $id;
+    }
+    //Getter du role de l'utilisateur
+    public function getRoleUser(String $email):int{
+        $stmt = $this ->pdo->prepare("select droit_utilisateur from utilisateur where email_utilisateur = ?");
+        $stmt->bindParam(1,$email);
+        $stmt->execute();
+        $id = $stmt->fetchColumn();
+        return $id;
+    }
 
+    //Getter du numero de telephone de l'utilisateur
+    public function getTelUser(String $email):String{
+        $stmt = $this ->pdo->prepare("select telephone_utilisateur from utilisateur where email_utilisateur = ?");
+        $stmt->bindParam(1,$email);
+        $stmt->execute();
+        $id = $stmt->fetchColumn();
+        return $id;
+    }
 }
