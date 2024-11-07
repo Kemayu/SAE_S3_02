@@ -1,9 +1,5 @@
 <?php
-<<<<<<< HEAD
-namespace iutnc\nrv\objets ;
-=======
 namespace iutnc\nrv\objets;
->>>>>>> 41fb9f9fb6a4de939ef0c305a3a1a97ce5d80495
 use iutnc\nrv\exception as exception;
 class Spectacle{
     protected String $titre;
