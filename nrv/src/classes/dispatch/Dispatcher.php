@@ -43,8 +43,20 @@ class Dispatcher
             case 'Display-Sorted':
                 $action = new act\DisplayProgSorted();
                 break;
+            case 'delete-soiree':
+                $action = new act\DeleteSoireeAction();
+                break;
             case 'Display-Par':
                 $action = new act\DisplayProgPar();
+                break;
+            case 'Display-Spec':
+                    $action = new act\DisplaySpectacle();
+                    break;
+            case 'cancel-spectacle':
+                $action = new act\CancelSpectacleAction();
+                break;
+            case 'modify-soi':
+                $action = new act\ModifySOIAction();
                 break;
             default :
                 $action = new act\DefaultAction();
@@ -61,6 +73,7 @@ class Dispatcher
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <link href="css/style.css" rel="stylesheet" />
     <meta charset="UTF-8">
     <title>NRV</title>
 </head>
@@ -77,12 +90,21 @@ class Dispatcher
          <li>-----------</li>
          <li><a href="?action=add-soiree">Crée la soirée</a></li>
          <li><a href="?action=create-spectacle">Creer un spectacle</a></li>
+         <li><a href="?action=cancel-spectacle">Annulé le spectacle</a></li>
          <li>-----------</li>
+        <li><a href="?action=modify-soiree">Modifier la soirée</a></li>
+        <li><a href="?action=modify-soi">MODIFIER SOIR</a></li>
+        <li>-----------</li>
          <li><a href="?action=Display-Sorted">Afficher le programme de manière triée</a></li>
          <li><a href="?action=Display-Par">Afficher le programme de manière par..</a></li>
+         <li><a href="?action=delete-soiree">Supprimé la Soirée</a></li>
+         
+         <li><a href="?action=Display-Spec">TEMPORAIRE Afficher Spectacle</a></li>
          
     </ul>
-    $html
+    <div class = "box">
+        $html
+    </div>
 </body>
 </html>
 HEAD;

@@ -163,7 +163,7 @@ class NrvRepository{
     }
 
 
-    public function createSpectacle(String $date, String $h, int $duree, int $tarifs,String $e, String $t,String $d,String $i,String $s):void{
+    public function createSpectacle(String $date, String $h, int $duree, float $tarifs,String $e, String $t,String $d,String $i,String $s):void{
         $sql ="insert into spectacle(DATE_SPECTACLE , HORAIRE_SPECTACLE, DUREE_SPECTACLE , TARIF_SPECTACLE , EXTRAIT_SPECTACLE , TITRE_SPECTACLE , DESCRIPTION_SPECTACLE, IMAGE_SPECTACLE ,STYLE_MUSIQUE) values(:date,:horraire,:duree,:tarifs,:extrait,:titre,:description,:image,:style)";
         $stmt = $this->pdo->prepare($sql);
 
@@ -206,6 +206,51 @@ class NrvRepository{
         $stmt->execute();
 
     }
+    public function deleteSoiree(int $id):void{
+        $sql ="DELETE FROM SOIREE WHERE id_soiree = :ID_SOIREE";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':ID_SOIREE',$id);
+        $stmt->execute();
+
+    }
+    public function deleteSoireeSpectacle(int $id_spectacle, int $id_soiree):void{
+        $sql ="DELETE FROM SOIREE_SPECTACLE WHERE id_spectacle = :ID_SPECTACLE AND id_soiree = :ID_SOIREE";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':ID_SOIREE',$id_soiree);
+        $stmt->bindParam(':ID_SPECTACLE',$id_spectacle);
+        $stmt->execute();
+
+    }
+    public function getIDSpectacleFromSpectacleSoiree(int $id_soiree):int{
+        $sql = "select ID_SPECTACLE from SOIREE_SPECTACLE where id_soiree = :ID_SOIREE";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':ID_SOIREE',$id_soiree);
+        $stmt->execute();
+        $infos = $stmt->fetchColumn();
+        return $infos;
+    }
+    public function StatusSpectacle(int $id_spectacle):void{
+        $sql = "UPDATE SPECTACLE SET DESCRIPTION_SPECTACLE = '2E' where id_spectacle = :ID_SPECTACLE ";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':ID_SPECTACLE',$id_spectacle);
+        $stmt->execute();
+    }
+    public function ModifySoiree(int $id_soiree, String $name, String $date, String $thematique , String $horraire, int $idlieu):void{
+        $sql ="
+            UPDATE SOIREE SET NOM_SOIREE = :nom where id_soiree = :id_soiree;
+            UPDATE SOIREE SET DATE_SOIREE = :date where id_soiree = :id_soiree;
+            UPDATE SOIREE SET THEMATIQUE = :thematique where id_soiree = :id_soiree;
+            UPDATE SOIREE SET HORRAIRE_DEBUT = :horraire where id_soiree = :id_soiree;
+            UPDATE SOIREE SET ID_LIEU = :idlieu where id_soiree = :id_soiree;";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':id_soiree',$id_soiree);
+        $stmt->bindParam(':nom',$name);
+        $stmt->bindParam(':date',$date);
+        $stmt->bindParam(':thematique',$thematique);
+        $stmt->bindParam(':horraire',$horraire);
+        $stmt->bindParam(':idlieu',$idlieu);
+        $stmt->execute();
+    }
 
     public function getALlIdTitreSpectacle():array{
         $sql = "select ID_SPECTACLE,TITRE_SPECTACLE from Spectacle";
@@ -244,6 +289,7 @@ class NrvRepository{
 
         $stmt->execute();
     }
+
 
 
 }
