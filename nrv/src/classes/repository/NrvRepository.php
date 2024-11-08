@@ -177,4 +177,28 @@ class NrvRepository{
         $stmt->execute();
 
     }
+    public function deleteSoiree(int $id):void{
+        $sql ="DELETE FROM SOIREE WHERE id_soiree = :ID_SOIREE";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':ID_SOIREE',$id);
+        $stmt->execute();
+
+    }
+    public function deleteSoireeSpectacle(int $id_spectacle, int $id_soiree):void{
+        $sql ="DELETE FROM SOIREE_SPECTACLE WHERE id_spectacle = :ID_SPECTACLE AND id_soiree = :ID_SOIREE";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':ID_SOIREE',$id_soiree);
+        $stmt->bindParam(':ID_SPECTACLE',$id_spectacle);
+        $stmt->execute();
+
+    }
+    public function getIDSpectacleFromSpectacleSoiree(int $id_soiree):int{
+        $sql = "select ID_SPECTACLE from SOIREE_SPECTACLE where id_soiree = :ID_SOIREE";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':ID_SOIREE',$id_soiree);
+        $stmt->execute();
+        $infos = $stmt->fetchColumn();
+        return $infos;
+    }
+
 }

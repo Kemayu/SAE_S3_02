@@ -40,6 +40,9 @@ class Dispatcher
             case 'Display-Sorted':
                 $action = new act\DisplayProgSorted();
                 break;
+            case 'delete-soiree':
+                $action = new act\DeleteSoireeAction();
+                break;
             default :
                 $action = new act\DefaultAction();
                 break;
@@ -70,6 +73,7 @@ class Dispatcher
          <li><a href="?action=create-spectacle">Creer spectacle</a></li>
          <li>-----------</li>
          <li><a href="?action=Display-Sorted">Afficher le programme de manière triée</a></li>
+         <li><a href="?action=delete-soiree">Supprimé la Soirée</a></li>
          
     </ul>
     $html
