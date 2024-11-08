@@ -40,16 +40,16 @@ class Dispatcher
             case 'modify-soiree':
                 $action = new act\ModifySoireeAction();
                 break;
-            case 'Display-Sorted':
+            case 'display-sorted':
                 $action = new act\DisplayProgSorted();
                 break;
             case 'delete-soiree':
                 $action = new act\DeleteSoireeAction();
                 break;
-            case 'Display-Par':
+            case 'display-par':
                 $action = new act\DisplayProgPar();
                 break;
-            case 'Display-Spec':
+            case 'display-spec':
                     $action = new act\DisplaySpectacle();
                     break;
             case 'cancel-spectacle':
@@ -89,11 +89,11 @@ class Dispatcher
          <li>-----------</li>
         <li><a href="?action=modify-soiree">Modifier la soirée</a></li>
         <li>-----------</li>
-         <li><a href="?action=Display-Sorted">Afficher le programme de manière triée</a></li>
-         <li><a href="?action=Display-Par">Afficher le programme de manière par..</a></li>
+         <li><a href="?action=display-sorted">Afficher le programme de manière triée</a></li>
+         <li><a href="?action=display-par">Afficher le programme de manière par..</a></li>
          <li><a href="?action=delete-soiree">Supprimé la Soirée</a></li>
          
-         <li><a href="?action=Display-Spec">TEMPORAIRE Afficher Spectacle</a></li>
+         <li><a href="?action=display-spec">TEMPORAIRE Afficher Spectacle</a></li>
          
     </ul>
     <div class = "box">

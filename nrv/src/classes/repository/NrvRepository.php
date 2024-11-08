@@ -236,4 +236,13 @@ class NrvRepository{
         $stmt->execute();
     }
 
+    public function getArtistesSpectacle($id){
+        $stmt = $this ->pdo->prepare("select nom_artiste from Artiste inner join artiste_spectacle on artiste.id_artiste = artiste_spectacle.id_artiste
+        inner join spectacle on artiste_spectacle.id_spectacle = spectacle.id_spectacle where spectacle.id_spectacle = ?");
+        $stmt->bindParam(1,$id);
+        $stmt->execute();
+        $artistes = $stmt->fetchAll();
+        return $artistes;
+    }
+
 }

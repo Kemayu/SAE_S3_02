@@ -87,7 +87,7 @@ class DisplayProgPar extends Action
                 case "STYLE_MUSIQUE" :
                     if(!isset($_GET['style'])){
                         $html = <<<END
-                        <form method="get" action="?action=Display-Par">
+                        <form method="get" action="?action=display-par">
                         <input type="hidden" name="lst" value=$val>
                         <select name=style>
                     END;
@@ -99,7 +99,7 @@ class DisplayProgPar extends Action
 
                     $html .= <<<END
                         </select>
-                        <input type="hidden" name="action" value="Display-Par">
+                        <input type="hidden" name="action" value="display-par">
                         <button type="submit">Afficher</button>
                         </form>
                     END;
@@ -109,7 +109,7 @@ class DisplayProgPar extends Action
                 break;
             }
             forEach($array as $spectacle){
-                $renderer = new render\RenderSpectacle(new objets\Spectacle($spectacle["ID_SPECTACLE"],$spectacle["TITRE_SPECTACLE"],$spectacle["DESCRIPTION_SPECTACLE"],$spectacle["IMAGE_SPECTACLE"],$spectacle["EXTRAIT_SPECTACLE"],$spectacle["DATE_SPECTACLE"],$spectacle["HORAIRE_SPECTACLE"],$spectacle["DUREE_SPECTACLE"],$spectacle["STYLE_MUSIQUE"],$spectacle["TARIF_SPECTACLE"]));
+                $renderer = new render\RenderSpectacle(new objets\Spectacle((int)$spectacle["ID_SPECTACLE"],$spectacle["TITRE_SPECTACLE"],$spectacle["DESCRIPTION_SPECTACLE"],$spectacle["IMAGE_SPECTACLE"],$spectacle["EXTRAIT_SPECTACLE"],$spectacle["DATE_SPECTACLE"],$spectacle["HORAIRE_SPECTACLE"],$spectacle["DUREE_SPECTACLE"],$spectacle["STYLE_MUSIQUE"],$spectacle["TARIF_SPECTACLE"]));
                 $html.= $renderer->render(1);
                 $html.="</br></br>";
             }
