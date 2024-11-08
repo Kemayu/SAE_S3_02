@@ -20,12 +20,25 @@ class CreateSpectacleAction extends Action
                <label>Description<input type="text" name="description"></label><br>
                <label>Image<input type="text" name="image"></label><br>
                <label>Style de musique<input type="text" name="style"></label><br>
-                <button type="submit">Créer</button>
+               <select name="ID_SOIREE">
+            END;
+            $array = NrvRepository::getInstance()->getIDSoiree();
+            // Boucle pour générer chaque option de la liste déroulante
+
+            foreach ($array as $option) {
+                $text = $option['ID_SOIREE']. " " . $option['NOM_SOIREE'];
+                $html .= "<option value='{$option['ID_SOIREE']}'>{$text}</option>";
+            }
+            $html.= <<<END
+            </select>
+            <input type="hidden" name="action" value="une-soiree">               
+            <button type="submit">Créer</button>
             </form>
             END;
 
         } else {
             NrvRepository::getInstance()->createSpectacle($_POST['date'],$_POST['horraire'],$_POST['duree'],$_POST['tarifs'],$_POST['extrait'],$_POST['titre'],$_POST['description'],$_POST['image'],$_POST['style']);
+            NrvRepository::getInstance()->createLinkSoireeSpectacle(NrvRepository::getInstance()->getIDSpectacle(),$_POST['ID_SOIREE']);
             $html = "spectacle creer";
             }
         return $html;

@@ -106,8 +106,7 @@ class NrvRepository{
         }
         $stmt = $this ->pdo->prepare("select distinct Spectacle.* from spectacle inner join soiree_spectacle on spectacle.id_spectacle=soiree_spectacle.id_spectacle
         inner join soiree on soiree_spectacle.id_soiree=soiree.id_soiree
-        inner join lieu_soiree on soiree.id_lieu=lieu_soiree.id_lieu
-        inner join lieu on lieu_soiree.id_lieu=lieu.id_lieu
+        inner join lieu on soiree.id_lieu=lieu.id_lieu
         ORDER BY $val ASC");
         $stmt->execute();
         $pgrm = $stmt->fetchAll();
@@ -172,6 +171,32 @@ class NrvRepository{
         $stmt->bindParam(':description',$d);
         $stmt->bindParam(':image',$i);
         $stmt->bindParam(':style',$s);
+
+        $stmt->execute();
+
+    }
+    public function getIDSoiree():array{
+        $sql = "select ID_SOIREE,NOM_SOIREE from SOIREE";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $infos = $stmt->fetchAll();
+        return $infos;
+    }
+
+    public function getIDSpectacle():int{
+        $sql = "select MAX(ID_SPECTACLE) from SPECTACLE ";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $infos = $stmt->fetchColumn();
+        return $infos;
+    }
+
+    public function createLinkSoireeSpectacle(int $idspectacle, int $idsoiree):void{
+        $sql ="insert into SOIREE_SPECTACLE(ID_SPECTACLE , ID_SOIREE) values(:ID_SPECTACLE,:ID_SOIREE)";
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->bindParam(':ID_SPECTACLE',$idspectacle);
+        $stmt->bindParam(':ID_SOIREE',$idsoiree);
 
         $stmt->execute();
 
