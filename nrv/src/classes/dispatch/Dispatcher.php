@@ -52,6 +52,9 @@ class Dispatcher
             case 'cancel-spectacle':
                 $action = new act\CancelSpectacleAction();
                 break;
+            case 'modify-soi':
+                $action = new act\ModifySOIAction();
+                break;
             default :
                 $action = new act\DefaultAction();
                 break;
@@ -84,6 +87,7 @@ class Dispatcher
          <li><a href="?action=cancel-spectacle">Annulé le spectacle</a></li>
          <li>-----------</li>
         <li><a href="?action=modify-soiree">Modifier la soirée</a></li>
+        <li><a href="?action=modify-soi">MODIFIER SOIR</a></li>
         <li>-----------</li>
          <li><a href="?action=Display-Sorted">Afficher le programme de manière triée</a></li>
          <li><a href="?action=Display-Par">Afficher le programme de manière par..</a></li>

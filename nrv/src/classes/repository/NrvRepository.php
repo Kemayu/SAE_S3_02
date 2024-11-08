@@ -235,5 +235,21 @@ class NrvRepository{
         $stmt->bindParam(':ID_SPECTACLE',$id_spectacle);
         $stmt->execute();
     }
+    public function ModifySoiree(int $id_soiree, String $name, String $date, String $thematique , String $horraire, int $idlieu):void{
+        $sql ="
+            UPDATE SOIREE SET NOM_SOIREE = :nom where id_soiree = :id_soiree;
+            UPDATE SOIREE SET DATE_SOIREE = :date where id_soiree = :id_soiree;
+            UPDATE SOIREE SET THEMATIQUE = :thematique where id_soiree = :id_soiree;
+            UPDATE SOIREE SET HORRAIRE_DEBUT = :horraire where id_soiree = :id_soiree;
+            UPDATE SOIREE SET ID_LIEU = :idlieu where id_soiree = :id_soiree;";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':id_soiree',$id_soiree);
+        $stmt->bindParam(':nom',$name);
+        $stmt->bindParam(':date',$date);
+        $stmt->bindParam(':thematique',$thematique);
+        $stmt->bindParam(':horraire',$horraire);
+        $stmt->bindParam(':idlieu',$idlieu);
+        $stmt->execute();
+    }
 
 }
