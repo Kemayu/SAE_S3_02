@@ -143,7 +143,7 @@ class NrvRepository{
         return $lieux;
     }
 
-    public function createsoiree(String $name, String $thematique, String $date, String $horraire, int $idlieu):void{
+    public function createSoiree(String $name, String $thematique, String $date, String $horraire, int $idlieu):void{
         $sql ="insert into Soiree(NOM_SOIREE,DATE_SOIREE,THEMATIQUE,HORAIRE_DEBUT,ID_LIEU) values(:nom,:thematique,:date,:horraire, :idlieu)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindParam(':nom',$name);
@@ -180,7 +180,7 @@ class NrvRepository{
         $stmt->execute();
 
     }
-    public function getIDSoiree():array{
+    public function getALlIdNameSoiree():array{
         $sql = "select ID_SOIREE,NOM_SOIREE from SOIREE";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
@@ -188,7 +188,7 @@ class NrvRepository{
         return $infos;
     }
 
-    public function getIDSpectacle():int{
+    public function getLastIdSpectacle():int{
         $sql = "select MAX(ID_SPECTACLE) from SPECTACLE ";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
@@ -206,4 +206,44 @@ class NrvRepository{
         $stmt->execute();
 
     }
+
+    public function getALlIdTitreSpectacle():array{
+        $sql = "select ID_SPECTACLE,TITRE_SPECTACLE from Spectacle";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $infos = $stmt->fetchAll();
+        return $infos;
+    }
+
+    public function updateSpectacle(int $id, String $date, String $h, int $duree, int $tarif,String $e, String $t,String $d,String $i,String $s) : void
+    {
+        $sql = "UPDATE Spectacle 
+            SET DATE_SPECTACLE = :date,
+                HORAIRE_SPECTACLE = :horaire,
+                DUREE_SPECTACLE = :duree,
+                TARIF_SPECTACLE = :tarif,
+                EXTRAIT_SPECTACLE = :extrait,
+                TITRE_SPECTACLE = :titre,
+                DESCRIPTION_SPECTACLE = :description,
+                IMAGE_SPECTACLE = :image,
+                STYLE_MUSIQUE = :style
+            WHERE ID_SPECTACLE = :id";
+
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->bindParam(':id',$id);
+        $stmt->bindParam(':date',$date);
+        $stmt->bindParam(':horaire',$h);
+        $stmt->bindParam(':duree',$duree);
+        $stmt->bindParam(':tarif',$tarif);
+        $stmt->bindParam(':extrait',$e);
+        $stmt->bindParam(':titre',$t);
+        $stmt->bindParam(':description',$d);
+        $stmt->bindParam(':image',$i);
+        $stmt->bindParam(':style',$s);
+
+        $stmt->execute();
+    }
+
+
 }
