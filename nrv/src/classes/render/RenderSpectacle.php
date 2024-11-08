@@ -11,10 +11,10 @@ class RenderSpectacle implements renderer{
     public function render(): string
     {
         return "
-        <div>
-            <h3 id='mon-titre' aria-describedby='description-titre'>{$this->spec->titre} - {$this->spec->dateSpectacle}</h3>
-            <p id='description-titre'>{$this ->spec->description} </p>
-            <img src='{$this->spec->image}' alt='Affiche' width='300' height='200'>
+        <div class = 'items'>
+            <h3 class='mon-titre' aria-describedby='description-titre'>{$this->spec->titre} - {$this->spec->dateSpectacle}</h3>
+            <p class='description-titre'>{$this ->spec->description} </p>
+            <a href = 'https://apprendre-html.3wa.fr/html/comprendre-html/base-langage-html-1/rendre-image-cliquable-html'><img class='img' src='{$this->spec->image}' alt='Affiche' width='300' height='400'></a>
         </div>
         ";
     }

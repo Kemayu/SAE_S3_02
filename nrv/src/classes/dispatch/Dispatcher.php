@@ -64,6 +64,7 @@ class Dispatcher
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <link href="css/style.css" rel="stylesheet" />
     <meta charset="UTF-8">
     <title>NRV</title>
 </head>
@@ -86,7 +87,9 @@ class Dispatcher
          <li><a href="?action=delete-soiree">Supprimé la Soirée</a></li>
          
     </ul>
-    $html
+    <div class = "box">
+        $html
+    </div>
 </body>
 </html>
 HEAD;
