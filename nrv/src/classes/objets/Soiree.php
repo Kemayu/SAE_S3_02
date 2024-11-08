@@ -1,7 +1,7 @@
 <?php
 namespace iutnc\nrv\objets ;
 use iutnc\nrv\exception as exception;
-class Soirée{
+class Soiree{
     protected String $nom;
     protected String $date;
     protected String $thematique;

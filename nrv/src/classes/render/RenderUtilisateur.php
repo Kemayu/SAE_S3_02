@@ -3,7 +3,7 @@ namespace iutnc\nrv\render;
 use iutnc\nrv\objets as objets;
 class RenderUtilisateur implements renderer{
     protected objets\Utilisateur $util;
-    public function __construct(objets\Utilisateur $Util)
+    public function __construct(objets\Utilisateur $util)
     {
         $this->util= $util;
     }

@@ -39,7 +39,7 @@ class CreateSpectacleAction extends Action
         } else {
             NrvRepository::getInstance()->createSpectacle($_POST['date'],$_POST['horraire'],$_POST['duree'],$_POST['tarifs'],$_POST['extrait'],$_POST['titre'],$_POST['description'],$_POST['image'],$_POST['style']);
             NrvRepository::getInstance()->createLinkSoireeSpectacle(NrvRepository::getInstance()->getIDSpectacle(),$_POST['ID_SOIREE']);
-            $html = "spectacle creer";
+            $html = "Spectacle créé";
             }
         return $html;
     }

@@ -50,13 +50,12 @@ class NrvRepository{
         return[false,$passwd];
     }
 
-    public function getSpectacleById(int $idSpec) :objets\Spectacle{
+    public function getSpectacleById(int $idSpec) : array{
         $stmt = $this->pdo->prepare("select * from spectacle where id_spectacle = :idS");
         $stmt->bindParam(':idS',$idSpec);
         $stmt->execute();
         $spectacle = $stmt->fetch();
-        $s = new objets\Spectacle($spectacle["TITRE_SPECTACLE"],$spectacle["DESCRIPTION_SPECTACLE"],$spectacle["IMAGE_SPECTACLE"],$spectacle["EXTRAIT_SPECTACLE"],$spectacle["DATE_SPECTACLE"],$spectacle["HORAIRE_SPECTACLE"],$spectacle["DUREE_SPECTACLE"],$spectacle["STYLE_MUSIQUE"],$spectacle["TARIF_SPECTACLE"]);
-        return $s;
+        return $spectacle;
     }
 
     //Fonction pour s'enregistrer
@@ -106,12 +105,42 @@ class NrvRepository{
         }
         $stmt = $this ->pdo->prepare("select distinct Spectacle.* from spectacle inner join soiree_spectacle on spectacle.id_spectacle=soiree_spectacle.id_spectacle
         inner join soiree on soiree_spectacle.id_soiree=soiree.id_soiree
-        inner join lieu_soiree on soiree.id_lieu=lieu_soiree.id_lieu
-        inner join lieu on lieu_soiree.id_lieu=lieu.id_lieu
+        inner join lieu on soiree.id_lieu=lieu.id_lieu
         ORDER BY $val ASC");
         $stmt->execute();
         $pgrm = $stmt->fetchAll();
         return $pgrm;
+    }
+
+    public function findProgramPar(String $val, String $cond): array {
+        $colonnes_autorisees = ['DATE_SPECTACLE', 'NOM_LIEU', 'STYLE_MUSIQUE'];
+
+        // Vérifie que $val est dans les colonnes autorisées, sinon on utilise une colonne par défaut
+        if (!in_array($val, $colonnes_autorisees, true)) {
+            $val = 'date_spectacle';  // Par défaut, tri par nom_spectacle
+        }
+        $stmt = $this ->pdo->prepare("select distinct Spectacle.* from spectacle inner join soiree_spectacle on spectacle.id_spectacle=soiree_spectacle.id_spectacle
+        inner join soiree on soiree_spectacle.id_soiree=soiree.id_soiree
+        inner join lieu on soiree.id_lieu=lieu.id_lieu
+        WHERE $val = ?");
+        $stmt->bindParam(1,$cond);
+        $stmt->execute();
+        $pgrm = $stmt->fetchAll();
+        return $pgrm;
+    }
+
+    public function recupAllLieux(){
+        $stmt = $this ->pdo->prepare("select id_lieu,nom_lieu from Lieu");
+        $stmt->execute();
+        $lieux = $stmt->fetchAll();
+        return $lieux;
+    }
+
+    public function recupAllStyles(){
+        $stmt = $this ->pdo->prepare("select style_musique from spectacle");
+        $stmt->execute();
+        $lieux = $stmt->fetchAll();
+        return $lieux;
     }
 
     public function createsoiree(String $name, String $thematique, String $date, String $horraire, int $idlieu):void{
