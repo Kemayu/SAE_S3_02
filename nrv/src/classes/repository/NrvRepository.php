@@ -290,6 +290,17 @@ class NrvRepository{
         $stmt->execute();
     }
 
+    public function VerifyAdmin(int $id) : void
+    {
+        $sql = "select Droit_Utilisateur from utilisateur where id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':id',$id);
+        $stmt->bindParam(':date',$date);
+        $stmt->execute();
+        //Pour la prochaine fois je dois surement faire en sorte que les utilisateur n'ont pas accès au modif dcp en vérifiant dans les classe action grace a cette fonction
+    }
+
+
 
 
 }
