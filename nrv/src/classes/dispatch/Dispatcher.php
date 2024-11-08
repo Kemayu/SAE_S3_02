@@ -49,6 +49,9 @@ class Dispatcher
             case 'Display-Par':
                 $action = new act\DisplayProgPar();
                 break;
+            case 'Display-Spec':
+                    $action = new act\DisplaySpectacle();
+                    break;
             case 'cancel-spectacle':
                 $action = new act\CancelSpectacleAction();
                 break;
@@ -70,6 +73,7 @@ class Dispatcher
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <link href="css/style.css" rel="stylesheet" />
     <meta charset="UTF-8">
     <title>NRV</title>
 </head>
@@ -93,9 +97,12 @@ class Dispatcher
          <li><a href="?action=Display-Par">Afficher le programme de manière par..</a></li>
          <li><a href="?action=delete-soiree">Supprimé la Soirée</a></li>
          
+         <li><a href="?action=Display-Spec">TEMPORAIRE Afficher Spectacle</a></li>
          
     </ul>
-    $html
+    <div class = "box">
+        $html
+    </div>
 </body>
 </html>
 HEAD;
