@@ -114,6 +114,31 @@ class NrvRepository{
         return $pgrm;
     }
 
+    public function findProgramPar(String $val, String $cond): array {
+        $colonnes_autorisees = ['DATE_SPECTACLE', 'NOM_LIEU', 'STYLE_MUSIQUE'];
+
+        // Vérifie que $val est dans les colonnes autorisées, sinon on utilise une colonne par défaut
+        if (!in_array($val, $colonnes_autorisees, true)) {
+            $val = 'date_spectacle';  // Par défaut, tri par nom_spectacle
+        }
+        $stmt = $this ->pdo->prepare("select distinct Spectacle.* from spectacle inner join soiree_spectacle on spectacle.id_spectacle=soiree_spectacle.id_spectacle
+        inner join soiree on soiree_spectacle.id_soiree=soiree.id_soiree
+        inner join lieu on soiree.id_lieu=lieu.id_lieu
+        WHERE $val = ?");
+        $stmt->bindParam(1,$cond);
+        echo $cond. " " . $val;
+        $stmt->execute();
+        $pgrm = $stmt->fetchAll();
+        return $pgrm;
+    }
+
+    public function recupAllLieux(){
+        $stmt = $this ->pdo->prepare("select id_lieu,nom_lieu from Lieu");
+        $stmt->execute();
+        $lieux = $stmt->fetchAll();
+        return $lieux;
+    }
+
     public function createsoiree(String $name, String $thematique, String $date, String $horraire, int $idlieu):void{
         $sql ="insert into Soiree(NOM_SOIREE,DATE_SOIREE,THEMATIQUE,HORAIRE_DEBUT,ID_LIEU) values(:nom,:thematique,:date,:horraire, :idlieu)";
         $stmt = $this->pdo->prepare($sql);
