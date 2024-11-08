@@ -151,4 +151,30 @@ class NrvRepository{
         $stmt->execute();
 
     }
+    public function getIDSoiree():array{
+        $sql = "select ID_SOIREE,NOM_SOIREE from SOIREE";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $infos = $stmt->fetchAll();
+        return $infos;
+    }
+
+    public function getIDSpectacle():int{
+        $sql = "select MAX(ID_SPECTACLE) from SPECTACLE ";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $infos = $stmt->fetchColumn();
+        return $infos;
+    }
+
+    public function createLinkSoireeSpectacle(int $idspectacle, int $idsoiree):void{
+        $sql ="insert into SOIREE_SPECTACLE(ID_SPECTACLE , ID_SOIREE) values(:ID_SPECTACLE,:ID_SOIREE)";
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->bindParam(':ID_SPECTACLE',$idspectacle);
+        $stmt->bindParam(':ID_SOIREE',$idsoiree);
+
+        $stmt->execute();
+
+    }
 }
