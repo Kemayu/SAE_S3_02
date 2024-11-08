@@ -50,7 +50,7 @@ class NrvRepository{
         return[false,$passwd];
     }
 
-    public function getSpectacleById(int $idSpec) :objets\Spectacle{
+    public function getSpectacleById(int $idSpec) : array{
         $stmt = $this->pdo->prepare("select * from spectacle where id_spectacle = :idS");
         $stmt->bindParam(':idS',$idSpec);
         $stmt->execute();
