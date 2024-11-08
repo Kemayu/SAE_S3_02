@@ -14,7 +14,7 @@ class CreateSpectacleAction extends Action
                <label>Date du spectacle<input type="date" name="date"></label><br>
                <label>Horraire du spectacle<input type="text" name="horraire"></label><br>
                <label>Durée<input type="number" name="duree"></label><br>
-               <label>Tarifs<input type="number" name="tarifs"></label><br>
+               <label>Tarifs<input type="number" name="tarifs"step="0.01"></label><br>
                <label>Extrait<input type="text" name="extrait"></label><br>
                <label>Titre<input type="text" name="titre"></label><br>
                <label>Description<input type="text" name="description"></label><br>
@@ -37,6 +37,7 @@ class CreateSpectacleAction extends Action
             END;
 
         } else {
+            echo $_POST["tarifs"];
             NrvRepository::getInstance()->createSpectacle($_POST['date'],$_POST['horraire'],$_POST['duree'],$_POST['tarifs'],$_POST['extrait'],$_POST['titre'],$_POST['description'],$_POST['image'],$_POST['style']);
             NrvRepository::getInstance()->createLinkSoireeSpectacle(NrvRepository::getInstance()->getIDSpectacle(),$_POST['ID_SOIREE']);
             $html = "Spectacle créé";
