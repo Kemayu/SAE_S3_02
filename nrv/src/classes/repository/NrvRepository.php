@@ -98,12 +98,17 @@ class NrvRepository{
     }
     //
     public function findProgramSorted(String $val): array {
+        $colonnes_autorisees = ['DATE_SPECTACLE', 'NOM_LIEU', 'STYLE_MUSIQUE'];
+
+        // Vérifie que $val est dans les colonnes autorisées, sinon on utilise une colonne par défaut
+        if (!in_array($val, $colonnes_autorisees, true)) {
+            $val = 'date_spectacle';  // Par défaut, tri par nom_spectacle
+        }
         $stmt = $this ->pdo->prepare("select distinct Spectacle.* from spectacle inner join soiree_spectacle on spectacle.id_spectacle=soiree_spectacle.id_spectacle
         inner join soiree on soiree_spectacle.id_soiree=soiree.id_soiree
         inner join lieu_soiree on soiree.id_lieu=lieu_soiree.id_lieu
         inner join lieu on lieu_soiree.id_lieu=lieu.id_lieu
-        ORDER BY ? ASC");
-        $stmt->bindParam(1,$val);
+        ORDER BY $val ASC");
         $stmt->execute();
         $pgrm = $stmt->fetchAll();
         return $pgrm;
