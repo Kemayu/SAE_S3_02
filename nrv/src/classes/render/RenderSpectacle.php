@@ -44,7 +44,10 @@ class RenderSpectacle implements renderer{
             <p id='Style'>Style: {$this->spec->styleMusique} </p>
             <p id='Duree'>Duree: {$this->spec->duree} min.</p>
             <img src='{$this->spec->image}' alt='Affiche' width='300' height='200'>
-            <p id='Extrait'> {$this->spec->extrait} </p>
+
+            <iframe width='560' height='315' src='{$this->spec->extrait}' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>
+
+            
         </div>
         ";
     }
