@@ -37,6 +37,9 @@ class Dispatcher
             case 'add-soiree':
                 $action = new act\CreateSoireeAction();
                 break;
+            case 'modify-soiree':
+                $action = new act\ModifySoireeAction();
+                break;
             case 'Display-Sorted':
                 $action = new act\DisplayProgSorted();
                 break;
@@ -66,6 +69,8 @@ class Dispatcher
     <ul>
          <li><a href="?action=default">Accueil</a></li>
          <li>-----------</li>
+         <li><a href="?action=add-soiree">Creer la soirée</a></li>
+         <li><a href="?action=modify-soiree">Modifier la soirée</a></li>
          <li><a href="?action=register">s'enregistrer</a></li>
          <li><a href="?action=signin">se connecter</a></li>
          <li><a href="?action=disconnect">Se deconnecter</a></li>
