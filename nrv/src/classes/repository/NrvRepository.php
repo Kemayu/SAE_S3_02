@@ -163,7 +163,7 @@ class NrvRepository{
     }
 
 
-    public function createSpectacle(String $date, String $h, int $duree, int $tarifs,String $e, String $t,String $d,String $i,String $s):void{
+    public function createSpectacle(String $date, String $h, int $duree, float $tarifs,String $e, String $t,String $d,String $i,String $s):void{
         $sql ="insert into spectacle(DATE_SPECTACLE , HORAIRE_SPECTACLE, DUREE_SPECTACLE , TARIF_SPECTACLE , EXTRAIT_SPECTACLE , TITRE_SPECTACLE , DESCRIPTION_SPECTACLE, IMAGE_SPECTACLE ,STYLE_MUSIQUE) values(:date,:horraire,:duree,:tarifs,:extrait,:titre,:description,:image,:style)";
         $stmt = $this->pdo->prepare($sql);
 
