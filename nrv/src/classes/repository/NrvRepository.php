@@ -136,6 +136,13 @@ class NrvRepository{
         return $lieux;
     }
 
+    public function recupAllStyles(){
+        $stmt = $this ->pdo->prepare("select style_musique from spectacle");
+        $stmt->execute();
+        $lieux = $stmt->fetchAll();
+        return $lieux;
+    }
+
     public function createsoiree(String $name, String $thematique, String $date, String $horraire, int $idlieu):void{
         $sql ="insert into Soiree(NOM_SOIREE,DATE_SOIREE,THEMATIQUE,HORAIRE_DEBUT,ID_LIEU) values(:nom,:thematique,:date,:horraire, :idlieu)";
         $stmt = $this->pdo->prepare($sql);
