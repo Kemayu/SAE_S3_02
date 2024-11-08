@@ -8,7 +8,7 @@ class RenderSoiree implements renderer{
         $this->soir= $soir;
     }
 
-    public function render(): string
+    public function render($type): string
     {
         return "
         <div>
