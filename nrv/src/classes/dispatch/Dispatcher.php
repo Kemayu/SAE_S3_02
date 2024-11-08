@@ -37,23 +37,26 @@ class Dispatcher
             case 'add-soiree':
                 $action = new act\CreateSoireeAction();
                 break;
-            case 'modify-soiree':
-                $action = new act\ModifySoireeAction();
+            case 'modify-spectacle':
+                $action = new act\ModifySpectacleAction();
                 break;
-            case 'Display-Sorted':
+            case 'display-sorted':
                 $action = new act\DisplayProgSorted();
                 break;
             case 'delete-soiree':
                 $action = new act\DeleteSoireeAction();
                 break;
-            case 'Display-Par':
+            case 'display-par':
                 $action = new act\DisplayProgPar();
                 break;
-            case 'Display-Spec':
+            case 'display-spec':
                     $action = new act\DisplaySpectacle();
                     break;
             case 'cancel-spectacle':
                 $action = new act\CancelSpectacleAction();
+                break;
+            case 'modify-soi':
+                $action = new act\ModifySOIAction();
                 break;
             default :
                 $action = new act\DefaultAction();
@@ -79,6 +82,8 @@ class Dispatcher
     <ul>
          <li><a href="?action=default">Accueil</a></li>
          <li>-----------</li>
+         <li><a href="?action=add-soiree">Creer la soirée</a></li>
+         <li><a href="?action=modify-spectacle">Modifier le spectacle</a></li>
          <li><a href="?action=register">s'enregistrer</a></li>
          <li><a href="?action=signin">se connecter</a></li>
          <li><a href="?action=disconnect">Se deconnecter</a></li>
@@ -88,12 +93,13 @@ class Dispatcher
          <li><a href="?action=cancel-spectacle">Annulé le spectacle</a></li>
          <li>-----------</li>
         <li><a href="?action=modify-soiree">Modifier la soirée</a></li>
+        <li><a href="?action=modify-soi">MODIFIER SOIR</a></li>
         <li>-----------</li>
-         <li><a href="?action=Display-Sorted">Afficher le programme de manière triée</a></li>
-         <li><a href="?action=Display-Par">Afficher le programme de manière par..</a></li>
+         <li><a href="?action=display-sorted">Afficher le programme de manière triée</a></li>
+         <li><a href="?action=display-par">Afficher le programme de manière par..</a></li>
          <li><a href="?action=delete-soiree">Supprimé la Soirée</a></li>
          
-         <li><a href="?action=Display-Spec">TEMPORAIRE Afficher Spectacle</a></li>
+         <li><a href="?action=display-spec">TEMPORAIRE Afficher Spectacle</a></li>
          
     </ul>
     <div class = "box">

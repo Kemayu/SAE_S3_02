@@ -4,6 +4,7 @@ namespace iutnc\nrv\objets;
 
 use iutnc\nrv\exception as exception;
 class Spectacle{
+    protected int $id;
     protected string $titre;
     protected string $description;
     protected string $image;
@@ -14,7 +15,8 @@ class Spectacle{
     protected string $styleMusique;
     protected float $tarifs;
 
-    public function __construct(String $t,String $d,String $i,String $e,String $date,String $h,int $duree,String $s,float $tarifs){
+    public function __construct(int $id,String $t,String $d,String $i,String $e,String $date,String $h,int $duree,String $s,float $tarifs){
+        $this->id = $id;
         $this -> titre = $t;
         $this -> description = $d;
         $this -> image = $i;

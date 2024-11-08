@@ -14,15 +14,16 @@
     border: 1px solid #24308c;
     border-radius: 1em;
     color: white;
-    text-align: center;
-    box-sizing: border-box;  
+    text-align: center;  
+    
 }
 
 .items img {
-    width: 100%;
     border-radius: 1em;
 }
-
+p{
+    width: 3em;
+}
 .mon-titre, .description-titre {
     color: white;
 }
