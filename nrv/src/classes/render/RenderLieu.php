@@ -14,8 +14,8 @@ class RenderLieu implements renderer{
         <div>
             <h3 id='nom-lieu'>{$this->lieu->nom}</h3>
             <p id='adresse-lieu'>{$this ->lieu->adresse} </p>
-            <p>{$this->lieu->place_debout>}</p>
-            <p>{$this->lieu->place_assises>}</p>
+            <p>{$this->lieu->place_debout}</p>
+            <p>{$this->lieu->place_assises}</p>
             <img src='{$this->lieu->image}' alt='Affiche' width='300' height='200'>
         </div>
         ";
