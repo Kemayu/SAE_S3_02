@@ -84,14 +84,40 @@ class DisplayProgPar extends Action
                     $array = $repo-> findProgramPar($val,$lieu);
                 }
                 break;
+                case "STYLE_MUSIQUE" :
+                    if(!isset($_GET['style'])){
+                        $html = <<<END
+                        <form method="get" action="?action=Display-Par">
+                        <input type="hidden" name="lst" value=$val>
+                        <select name=style>
+                    END;
+
+                    $styles = $repo->recupAllStyles();
+                    forEach($styles as $style){
+                        $html .= "<option value={$style["style_musique"]}> {$style["style_musique"]}</option>";
+                    }
+
+                    $html .= <<<END
+                        </select>
+                        <input type="hidden" name="action" value="Display-Par">
+                        <button type="submit">Afficher</button>
+                        </form>
+                    END;
+                }else{
+                    $array = $repo-> findProgramPar($val,$_GET["style"]);
+                }
+                break;
             }
             forEach($array as $spectacle){
                 $renderer = new render\RenderSpectacle(new objets\Spectacle($spectacle["TITRE_SPECTACLE"],$spectacle["DESCRIPTION_SPECTACLE"],$spectacle["IMAGE_SPECTACLE"],$spectacle["EXTRAIT_SPECTACLE"],$spectacle["DATE_SPECTACLE"],$spectacle["HORAIRE_SPECTACLE"],$spectacle["DUREE_SPECTACLE"],$spectacle["STYLE_MUSIQUE"],$spectacle["TARIF_SPECTACLE"]));
                 $html.= $renderer->render();
                 $html.="</br></br>";
             }
-            if (count($array) === 0){
-                $html.= "pas de spectacle ..";
+            if (count($array) === 0 and isset($_GET["date"])){
+                $html.= "pas de spectacle à cette date..";
+            }
+            if (count($array) === 0 and isset($_GET["lieu"])){
+                $html.= "pas de spectacle à cette date..";
             }
         }
         return $html;

@@ -55,8 +55,7 @@ class NrvRepository{
         $stmt->bindParam(':idS',$idSpec);
         $stmt->execute();
         $spectacle = $stmt->fetch();
-        $s = new objets\Spectacle($spectacle["TITRE_SPECTACLE"],$spectacle["DESCRIPTION_SPECTACLE"],$spectacle["IMAGE_SPECTACLE"],$spectacle["EXTRAIT_SPECTACLE"],$spectacle["DATE_SPECTACLE"],$spectacle["HORAIRE_SPECTACLE"],$spectacle["DUREE_SPECTACLE"],$spectacle["STYLE_MUSIQUE"],$spectacle["TARIF_SPECTACLE"]);
-        return $s;
+        return $spectacle;
     }
 
     //Fonction pour s'enregistrer
@@ -132,6 +131,13 @@ class NrvRepository{
 
     public function recupAllLieux(){
         $stmt = $this ->pdo->prepare("select id_lieu,nom_lieu from Lieu");
+        $stmt->execute();
+        $lieux = $stmt->fetchAll();
+        return $lieux;
+    }
+
+    public function recupAllStyles(){
+        $stmt = $this ->pdo->prepare("select style_musique from spectacle");
         $stmt->execute();
         $lieux = $stmt->fetchAll();
         return $lieux;
