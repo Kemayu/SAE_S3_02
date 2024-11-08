@@ -125,7 +125,6 @@ class NrvRepository{
         inner join lieu on soiree.id_lieu=lieu.id_lieu
         WHERE $val = ?");
         $stmt->bindParam(1,$cond);
-        echo $cond. " " . $val;
         $stmt->execute();
         $pgrm = $stmt->fetchAll();
         return $pgrm;

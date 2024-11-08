@@ -47,7 +47,6 @@ class DisplayProgPar extends Action
                     if(!isset($_GET['date'])){
                         $html = <<<END
                         <form method="get" action="?action=Display-par">
-                        <select name=lst>
                         <input type="hidden" name="lst" value=$val>
                         <label for="date">Date de la journée :</label>
                         <input type="date" name="date" required><br>
@@ -57,7 +56,7 @@ class DisplayProgPar extends Action
                         </form>
                         END;
                     }else{
-                        $array -> $repo-> findProgramPar($val,$_GET['date']);
+                        $array = $repo-> findProgramPar($val,$_GET['date']);
                     }
                     break;
                 case "NOM_LIEU" :
@@ -90,6 +89,9 @@ class DisplayProgPar extends Action
                 $renderer = new render\RenderSpectacle(new objets\Spectacle($spectacle["TITRE_SPECTACLE"],$spectacle["DESCRIPTION_SPECTACLE"],$spectacle["IMAGE_SPECTACLE"],$spectacle["EXTRAIT_SPECTACLE"],$spectacle["DATE_SPECTACLE"],$spectacle["HORAIRE_SPECTACLE"],$spectacle["DUREE_SPECTACLE"],$spectacle["STYLE_MUSIQUE"],$spectacle["TARIF_SPECTACLE"]));
                 $html.= $renderer->render(1);
                 $html.="</br></br>";
+            }
+            if (count($array) === 0){
+                $html.= "pas de spectacle ..";
             }
         }
         return $html;
