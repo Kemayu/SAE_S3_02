@@ -8,7 +8,7 @@ class RenderLieu implements renderer{
         $this->lieu= $lieu;
     }
 
-    public function render(): string
+    public function render($type): string
     {
         return "
         <div>

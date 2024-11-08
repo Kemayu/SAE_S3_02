@@ -8,7 +8,7 @@ class RenderUtilisateur implements renderer{
         $this->util= $util;
     }
 
-    public function render(): string
+    public function render($type): string
     {
         return "
         //J'ai enlevé la partie html pour utilisateur comme c'est les informations persos donc si il faut la rajouter ditent le moi 

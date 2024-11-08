@@ -49,6 +49,9 @@ class Dispatcher
             case 'Display-Par':
                 $action = new act\DisplayProgPar();
                 break;
+            case 'Display-Spec':
+                    $action = new act\DisplaySpectacle();
+                    break;
             default :
                 $action = new act\DefaultAction();
                 break;
@@ -85,6 +88,7 @@ class Dispatcher
          <li><a href="?action=Display-Par">Afficher le programme de manière par..</a></li>
          <li><a href="?action=delete-soiree">Supprimé la Soirée</a></li>
          
+         <li><a href="?action=Display-Spec">TEMPORAIRE Afficher Spectacle</a></li>
     </ul>
     $html
 </body>
