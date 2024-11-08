@@ -43,6 +43,9 @@ class Dispatcher
             case 'Display-Sorted':
                 $action = new act\DisplayProgSorted();
                 break;
+            case 'delete-soiree':
+                $action = new act\DeleteSoireeAction();
+                break;
             case 'Display-Par':
                 $action = new act\DisplayProgPar();
                 break;
@@ -80,6 +83,7 @@ class Dispatcher
          <li>-----------</li>
          <li><a href="?action=Display-Sorted">Afficher le programme de manière triée</a></li>
          <li><a href="?action=Display-Par">Afficher le programme de manière par..</a></li>
+         <li><a href="?action=delete-soiree">Supprimé la Soirée</a></li>
          
     </ul>
     $html
