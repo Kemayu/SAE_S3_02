@@ -41,7 +41,7 @@ class DisplayProgSorted extends Action
             $val = $_GET['lst'];
             $repo = \iutnc\nrv\repository\NrvRepository::getInstance();
             $prg = $repo->findProgramSorted($val);
-            $html = "<div> voici votre Programme : </div>";
+            $html = "<p> voici votre Programme : </p>";
             $html.="</br></br>";
             $i = 1;
 
