@@ -106,8 +106,7 @@ class NrvRepository{
         }
         $stmt = $this ->pdo->prepare("select distinct Spectacle.* from spectacle inner join soiree_spectacle on spectacle.id_spectacle=soiree_spectacle.id_spectacle
         inner join soiree on soiree_spectacle.id_soiree=soiree.id_soiree
-        inner join lieu_soiree on soiree.id_lieu=lieu_soiree.id_lieu
-        inner join lieu on lieu_soiree.id_lieu=lieu.id_lieu
+        inner join lieu on soiree.id_lieu=lieu.id_lieu
         ORDER BY $val ASC");
         $stmt->execute();
         $pgrm = $stmt->fetchAll();
