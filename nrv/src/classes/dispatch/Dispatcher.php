@@ -72,8 +72,6 @@ class Dispatcher
     <ul>
          <li><a href="?action=default">Accueil</a></li>
          <li>-----------</li>
-         <li><a href="?action=add-soiree">Creer la soirée</a></li>
-         <li><a href="?action=modify-soiree">Modifier la soirée</a></li>
          <li><a href="?action=register">s'enregistrer</a></li>
          <li><a href="?action=signin">se connecter</a></li>
          <li><a href="?action=disconnect">Se deconnecter</a></li>
@@ -81,6 +79,8 @@ class Dispatcher
          <li><a href="?action=add-soiree">Crée la soirée</a></li>
          <li><a href="?action=create-spectacle">Creer un spectacle</a></li>
          <li>-----------</li>
+        <li><a href="?action=modify-soiree">Modifier la soirée</a></li>
+        <li>-----------</li>
          <li><a href="?action=Display-Sorted">Afficher le programme de manière triée</a></li>
          <li><a href="?action=Display-Par">Afficher le programme de manière par..</a></li>
          <li><a href="?action=delete-soiree">Supprimé la Soirée</a></li>
