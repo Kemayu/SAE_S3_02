@@ -49,6 +49,9 @@ class Dispatcher
             case 'Display-Par':
                 $action = new act\DisplayProgPar();
                 break;
+            case 'cancel-spectacle':
+                $action = new act\CancelSpectacleAction();
+                break;
             default :
                 $action = new act\DefaultAction();
                 break;
@@ -80,10 +83,12 @@ class Dispatcher
          <li>-----------</li>
          <li><a href="?action=add-soiree">Crée la soirée</a></li>
          <li><a href="?action=create-spectacle">Creer un spectacle</a></li>
+         <li><a href="?action=cancel-spectacle">Annulé le spectacle</a></li>
          <li>-----------</li>
          <li><a href="?action=Display-Sorted">Afficher le programme de manière triée</a></li>
          <li><a href="?action=Display-Par">Afficher le programme de manière par..</a></li>
          <li><a href="?action=delete-soiree">Supprimé la Soirée</a></li>
+         
          
     </ul>
     $html

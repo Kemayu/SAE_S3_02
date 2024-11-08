@@ -229,5 +229,11 @@ class NrvRepository{
         $infos = $stmt->fetchColumn();
         return $infos;
     }
+    public function StatusSpectacle(int $id_spectacle):void{
+        $sql = "UPDATE SPECTACLE SET DESCRIPTION_SPECTACLE = '2E' where id_spectacle = :ID_SPECTACLE ";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':ID_SPECTACLE',$id_spectacle);
+        $stmt->execute();
+    }
 
 }
