@@ -39,10 +39,10 @@ class RenderSpectacle implements renderer{
         return "
         <div>
             <h3 id='mon-titre' aria-describedby='description-titre'>{$this->spec->titre} </h3>
-            <P id='Artistes'> </p>
+            <P id='Artistes'> IL Y A DES PROBLEMES DANS L AFFICHAGE DES ARTISTES</p>
             <p id='description-titre'>{$this ->spec->description} </p>
-            <p id='Style'>{$this->spec->styleMusique} </p>
-            <p id='Duree'> {$this->spec->duree}</p>
+            <p id='Style'>Style: {$this->spec->styleMusique} </p>
+            <p id='Duree'>Duree: {$this->spec->duree} min.</p>
             <img src='{$this->spec->image}' alt='Affiche' width='300' height='200'>
             <p id='Extrait'> {$this->spec->extrait} </p>
         </div>
