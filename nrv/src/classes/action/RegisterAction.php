@@ -17,7 +17,7 @@ class RegisterAction extends Action
                 <label>Nom d'Utilisateur <input type="text" name="usr" placeholder="Nom d'Utilisateur"></label>
                 <label>Numero de telephone <input type="text" name="tel" placeholder="06 ..."></label>
                 <label>Email <input type="text" name="email" placeholder="email"></label>
-                <label>Mot de passe <input type="text" name="mdp" placeholder="mot de passe"></label>
+                <label>Mot de passe <input type="password" name="mdp" placeholder="mot de passe"></label>
                 <button type="submit">Créer</button>
             </form>
             END;
