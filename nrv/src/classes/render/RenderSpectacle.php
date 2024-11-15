@@ -19,6 +19,8 @@ class RenderSpectacle implements renderer{
                 return $this->renderLong() . "\n";
             case self::COURT:
                 return $this->renderCourt() . "\n";
+            case self::PREFERENCE:
+                return $this->renderPreference() . "\n";
             default:
                 return "Type de rendu inconnu";
         }
@@ -83,6 +85,17 @@ class RenderSpectacle implements renderer{
             <h3 class='mon-titre' aria-describedby='description-titre'>{$this->spec->titre} </h3>
             <a href = $url><img class='img' src='{$this->spec->image}' alt='Affiche' width='300' height='400'></a>
         </div>
+        ";
+    }
+
+    public function renderPreference() :String{
+        $id = (String)$this->spec->id;
+        $url= "?id=". $id;
+        $url.="&action=display-spec";
+        return "
+            <h3 class='mon-titre' aria-describedby='description-titre'>{$this->spec->titre} - {$this->spec->dateSpectacle}</h3>
+            <p class='description-titre'>{$this ->spec->description} </p>
+            <a href = $url><img class='img' src='{$this->spec->image}' alt='Affiche' width='300' height='400'></a>
         ";
     }
 }

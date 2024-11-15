@@ -26,14 +26,14 @@ class DisplayPreference extends Action
             $html.="<div class = 'box'>";
             forEach($spect as $spec){
                 $spectacle = $repo->getSpectacleById($spec['ID_SPECTACLE']);
+                $html .= "<div class = 'items'>";
                 $renderer = new render\RenderSpectacle(new objets\Spectacle((int)$spectacle["ID_SPECTACLE"],$spectacle["TITRE_SPECTACLE"],$spectacle["DESCRIPTION_SPECTACLE"],$spectacle["IMAGE_SPECTACLE"],$spectacle["EXTRAIT_SPECTACLE"],$spectacle["DATE_SPECTACLE"],$spectacle["HORAIRE_SPECTACLE"],$spectacle["DUREE_SPECTACLE"],$spectacle["STYLE_MUSIQUE"],$spectacle["TARIF_SPECTACLE"]));
-                $html.= $renderer->render(1);
+                $html.= $renderer->render(4);
                 $html.= <<< END
-                <div class = 'items'>
                 <form method="POST" action="?action=remove-preference">
                 </select>
                 <input type="hidden" name="spectacle" value={$spectacle['ID_SPECTACLE']}>       
-                <button type="submit">Supprimer preference</button>
+                <button type="submit">Retirer</button>
                 </form>
                 </div>
                 </br></br>"

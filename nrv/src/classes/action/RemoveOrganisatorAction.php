@@ -15,11 +15,11 @@ class RemoveOrganisatorAction extends Action
             AuthnProvider::getSignInUser();
 
         } catch (AuthnException $e) {
-            return "<h3>Vous n'êtes pas authentifier</h3>";
+            return "<h3>Vous n'êtes pas authentifié</h3>";
         }
 
         if (AuthnProvider::getUserDroit() == 1 || AuthnProvider::getUserDroit() == 15) {
-            return "<h3>Vous n'avez pas accès a la suppression d'organisateur !</h3>";
+            return "<h3>Vous n'avez pas accès à la suppression d'organisateurs !</h3>";
         }
         else if ($this->http_method === 'GET') {
 

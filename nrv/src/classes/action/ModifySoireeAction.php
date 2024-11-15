@@ -13,11 +13,11 @@ class ModifySoireeAction extends Action
         try{
             AuthnProvider::getSignInUser(); }
         catch(AuthnException $e){
-            return "<h3>Pas authentifier</h3>";
+            return "<h3>Pas authentifié</h3>";
         }
 
         if (AuthnProvider::getUserDroit() == 1) {
-            return "<h3>Vous n'avez pas accès a la modification de soirée !</h3>";
+            return "<h3>Vous n'avez pas accès aux modifications de soirée !</h3>";
         }
         $selectedSoireeId = $_GET['ID_SOIREE'] ?? null;
 

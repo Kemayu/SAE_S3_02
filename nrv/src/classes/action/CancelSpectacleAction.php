@@ -39,7 +39,7 @@ class CancelSpectacleAction extends Action
             $html .= <<<END
             </select>
             <input type="hidden" name="action" value="un-spectacle">               
-            <button type="submit">Annulé Spectacle</button>
+            <button type="submit">Annuler Spectacle</button>
             </form>
             END;
 

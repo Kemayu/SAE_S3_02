@@ -111,7 +111,7 @@ class DisplayProgPar extends Action
                 $html.= "<h3>pas de spectacle à cette date..</h3>";
             }
             if (count($array) === 0 and isset($_GET["lieu"])){
-                $html.= "<h3>pas de spectacle à cette date..</h3>";
+                $html.= "<h3>pas de spectacle à ce lieu..</h3>";
             }
         }
         return $html;

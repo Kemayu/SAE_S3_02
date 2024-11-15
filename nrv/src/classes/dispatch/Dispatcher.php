@@ -130,7 +130,6 @@ class Dispatcher
                 <a href="?action=create-spectacle">Créer un spectacle</a>
                 <a href="?action=modify-spectacle">Modifier le spectacle</a>
                 <a href="?action=cancel-spectacle">Annuler le spectacle</a>
-                <a href="?action=display-spec">Afficher un spectacle</a>
             </div>
         </li>
         
@@ -191,7 +190,6 @@ HEAD;
                 <a href="?action=create-spectacle">Créer un spectacle</a>
                 <a href="?action=modify-spectacle">Modifier le spectacle</a>
                 <a href="?action=cancel-spectacle">Annuler le spectacle</a>
-                <a href="?action=display-spec">Afficher un spectacle</a>
             </div>
         </li>
         

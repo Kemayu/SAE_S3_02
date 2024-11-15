@@ -13,7 +13,7 @@ class CreateSoireeAction extends Action
         try {
             AuthnProvider::getSignInUser();
         } catch (AuthnException $e) {
-            return "<h3>Pas authentifier</h3>";
+            return "<h3>Pas authentifié</h3>";
         }
 
         if (AuthnProvider::getUserDroit() == 1) {

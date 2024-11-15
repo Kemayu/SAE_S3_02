@@ -13,7 +13,7 @@ class DeleteSoireeAction extends Action
         try{
             AuthnProvider::getSignInUser(); }
         catch(AuthnException $e){
-            return "<h3>Pas authentifier</h3>";
+            return "<h3>Pas authentifié</h3>";
         }
 
         if (AuthnProvider::getUserDroit() == 1) {
@@ -34,14 +34,14 @@ class DeleteSoireeAction extends Action
             $html.= <<<END
             </select>
             <input type="hidden" name="action" value="une-soiree">               
-            <button type="submit">Supprimé</button>
+            <button type="submit">Supprimer</button>
             </form>
             END;
 
         } else {
             NrvRepository::getInstance()->deleteSoiree($_POST['ID_SOIREE']);
             NrvRepository::getInstance()->deleteSoireeSpectacle( NrvRepository::getInstance()->getIDSpectacleFromSpectacleSoiree($_POST['ID_SOIREE']), $_POST['ID_SOIREE']);
-            $html = "<h3>Soirée supprimé</h3>";
+            $html = "<h3>Soirée supprimée</h3>";
         }
         return $html;
     }
