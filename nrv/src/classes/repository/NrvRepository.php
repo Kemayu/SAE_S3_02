@@ -322,4 +322,16 @@ class NrvRepository{
         return $artistes;
     }
 
+    public function addPreference(int $id_User,int $id_Spec):
+    {
+        $sql ="insert into UTILISATEUR_SPECTACLE(ID_UTILISATEUR , ID_SPECTACLE) values(:idUser,:idSpec)";
+        $stmt = $this->pdo->prepare($sql);
+    
+        $stmt->bindParam(':idUser',$id_User);
+        $stmt->bindParam(':idSpec',$id_Spec);
+        
+        $stmt->execute();
+    
+    }
+
 }
