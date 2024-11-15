@@ -14,29 +14,21 @@ class DisplayProgSorted extends Action
     {
         
         if((!isset($_GET['lst']))){
-            $connect = true;
-            try{
-                auth\AuthnProvider::getSignInUser();
-            }catch(exception\AuthnException $e){
-                $html = $e->getMEssage(); $connect = false;
-            };
-            if($connect){
-                $html = <<<END
-                <form method="get" action="?action=display-sorted">
-                    <select name=lst>
-                END;
+            $html = <<<END
+            <form method="get" action="?action=display-sorted">
+                <select name=lst>
+            END;
 
-                $html .= "<option value=DATE_SPECTACLE> Trier par journée</option>";
-                $html .= "<option value=NOM_LIEU> Trier par lieu</option>";
-                $html .= "<option value=STYLE_MUSIQUE> Trier par style de musique</option>";
+            $html .= "<option value=DATE_SPECTACLE> Trier par journée</option>";
+            $html .= "<option value=NOM_LIEU> Trier par lieu</option>";
+            $html .= "<option value=STYLE_MUSIQUE> Trier par style de musique</option>";
 
-                $html .= <<<END
-                    </select>
-                    <input type="hidden" name="action" value="display-sorted">
-                    <button type="submit">Afficher</button>
-                    </form>
-                END;
-            }
+            $html .= <<<END
+                </select>
+                <input type="hidden" name="action" value="display-sorted">
+                <button type="submit">Afficher</button>
+                </form>
+            END;
         }else{
             $val = $_GET['lst'];
             $repo = \iutnc\nrv\repository\NrvRepository::getInstance();
@@ -51,4 +43,5 @@ class DisplayProgSorted extends Action
         }
         return $html;
     }
+    
 }

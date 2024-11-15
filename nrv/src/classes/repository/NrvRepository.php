@@ -311,10 +311,10 @@ class NrvRepository{
         $stmt->execute();
     }
 
-    public function updateSpectacle(int $id, String $date, String $h, int $duree, int $tarif,String $e, String $t,String $d,String $i,String $s) : void
+    public function updateSpectacle(int $id, String $h, int $duree, int $tarif,String $e, String $t,String $d,String $i,String $s) : void
     {
         $sql = "UPDATE Spectacle 
-            SET DATE_SPECTACLE = :date,
+            SET 
                 HORAIRE_SPECTACLE = :horaire,
                 DUREE_SPECTACLE = :duree,
                 TARIF_SPECTACLE = :tarif,
@@ -328,7 +328,6 @@ class NrvRepository{
         $stmt = $this->pdo->prepare($sql);
 
         $stmt->bindParam(':id',$id);
-        $stmt->bindParam(':date',$date);
         $stmt->bindParam(':horaire',$h);
         $stmt->bindParam(':duree',$duree);
         $stmt->bindParam(':tarif',$tarif);

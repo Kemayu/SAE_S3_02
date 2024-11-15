@@ -12,6 +12,7 @@ class DisplayPreference extends Action
 
     public function execute(): string
     {
+        $IdUSer = null;
         $connect = true;
         try{
             $IdUser = auth\AuthnProvider::getSignInUser();
