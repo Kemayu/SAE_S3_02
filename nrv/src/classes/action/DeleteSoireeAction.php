@@ -24,7 +24,7 @@ class DeleteSoireeAction extends Action
                
                <select name="ID_SOIREE">
             END;
-            $array = NrvRepository::getInstance()->getIDSoiree();
+            $array = NrvRepository::getInstance()->getALlIdNameSoiree();
             // Boucle pour générer chaque option de la liste déroulante
 
             foreach ($array as $option) {
@@ -41,7 +41,7 @@ class DeleteSoireeAction extends Action
         } else {
             NrvRepository::getInstance()->deleteSoiree($_POST['ID_SOIREE']);
             NrvRepository::getInstance()->deleteSoireeSpectacle( NrvRepository::getInstance()->getIDSpectacleFromSpectacleSoiree($_POST['ID_SOIREE']), $_POST['ID_SOIREE']);
-            $html = "Soirée supprimé";
+            $html = "<h3>Soirée supprimé</h3>";
         }
         return $html;
     }

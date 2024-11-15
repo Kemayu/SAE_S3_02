@@ -41,8 +41,8 @@ class AddOrganisatorAction extends Action
             END;
 
         } else {
-            NrvRepository::getInstance()->updateUserRole($_POST['ID_UTILISATEUR'], 15);
-            $html = "Organisteur ajouté";
+            NrvRepository::getInstance()->setUserRole($_POST['ID_UTILISATEUR'], 15);
+            $html = "<h3>Organisteur ajouté</h3>";
         }
         return $html;
     }

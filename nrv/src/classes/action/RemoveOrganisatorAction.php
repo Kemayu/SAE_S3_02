@@ -42,8 +42,8 @@ class RemoveOrganisatorAction extends Action
             END;
 
         } else {
-            NrvRepository::getInstance()->updateUserRole($_POST['ID_UTILISATEUR'], 1);
-            $html = "Organisteur retiré";
+            NrvRepository::getInstance()->setUserRole($_POST['ID_UTILISATEUR'], 1);
+            $html = "<h3>Organisteur retiré</h3>";
         }
         return $html;
     }

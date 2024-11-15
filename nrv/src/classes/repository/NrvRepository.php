@@ -287,6 +287,17 @@ class NrvRepository{
         $stmt->execute();
     }
 
+    public function setUserRole($idUser, $role):void{
+        $sql ="
+            UPDATE UTILISATEUR SET
+               DROIT_UTILISATEUR = :role
+            where ID_UTILISATEUR = :id_user";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':id_user',$idUser);
+        $stmt->bindParam(':role',$role);
+        $stmt->execute();
+    }
+
     public function updateSoiree(int $id_soiree, String $name, String $date, String $thematique , String $horaire, int $idlieu):void{
         $sql ="
             UPDATE SOIREE SET
@@ -303,17 +314,6 @@ class NrvRepository{
         $stmt->bindParam(':thematique',$thematique);
         $stmt->bindParam(':horaire',$horaire);
         $stmt->bindParam(':idlieu',$idlieu);
-        $stmt->execute();
-    }
-
-    public function updateUserRole($idUser, $role):void{
-        $sql ="
-            UPDATE UTILISATEUR SET
-               DROIT_UTILISATEUR = :role
-            where ID_UTILISATEUR = :id_user";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':id_user',$idUser);
-        $stmt->bindParam(':role',$role);
         $stmt->execute();
     }
 

@@ -66,7 +66,7 @@ class ModifySoireeAction extends Action
                 </label><br>
 
                 <label>Horaire
-                    <input type="text" name="HORAIRE_DEBUT" value="{$soiree['HORAIRE_DEBUT']}">
+                    <input type="time" name="HORAIRE_DEBUT" value="{$soiree['HORAIRE_DEBUT']}">
                 </label><br>
                 <label>Lieu</label>  
                 <select name="ID_LIEU"">
@@ -106,7 +106,7 @@ class ModifySoireeAction extends Action
                 $_POST['ID_LIEU'],
 
             );
-            $html = "Soirée modifiée avec succès";
+            $html = "<h3>Soirée modifiée avec succès</h3>";
         }
 
         return $html;

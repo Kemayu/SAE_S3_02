@@ -17,7 +17,7 @@ class ModifySpectacleAction extends Action
         }
 
         if (AuthnProvider::getUserDroit() == 1) {
-            return "<h3>Vous n'avez pas accès a la modification de soirée !</h3>";
+            return "<h3>Vous n'avez pas accès a la modification de spectacle !</h3>";
         }
         // Récupérer l'ID du spectacle sélectionné dans la requête GET (si disponible)
         $selectedSpectacleId = $_GET['ID_SPECTACLE'] ?? null;
@@ -61,7 +61,7 @@ class ModifySpectacleAction extends Action
                 </label><br>
 
                 <label>Horaire du spectacle
-                    <input type="text" name="horaire" value="{$spectacle['HORAIRE_SPECTACLE']}">
+                    <input type="time" name="horaire" value="{$spectacle['HORAIRE_SPECTACLE']}">
                 </label><br>
 
                 <label>Durée
@@ -73,7 +73,7 @@ class ModifySpectacleAction extends Action
                 </label><br>
 
                 <label>Extrait
-                    <input type="text" name="extrait" value="{$spectacle['EXTRAIT_SPECTACLE']}">
+                    <input type="url" name="extrait" value="{$spectacle['EXTRAIT_SPECTACLE']}">
                 </label><br>
 
                 <label>Titre
@@ -85,7 +85,7 @@ class ModifySpectacleAction extends Action
                 </label><br>
 
                 <label>Image
-                    <input type="text" name="image" value="{$spectacle['IMAGE_SPECTACLE']}">
+                    <input type="url" name="image" value="{$spectacle['IMAGE_SPECTACLE']}">
                 </label><br>
 
                 <label>Style de musique
@@ -111,7 +111,7 @@ class ModifySpectacleAction extends Action
                 $_POST['image'],
                 $_POST['style']
             );
-            $html = "Spectacle modifié avec succès";
+            $html = "<h3>Spectacle modifié avec succès</h3>";
         }
 
         return $html;

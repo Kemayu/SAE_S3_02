@@ -13,9 +13,9 @@ class DisconnectAction extends Action
     {       
         if (isset( $_SESSION['user'])) {
             session_destroy();
-            return "vous avez été déconnecté";
+            return "<h3>vous avez été déconnecté</h3>";
         } else {
-            return "Vous n'êtes pas connecté";
+            return "<h3>Vous n'êtes pas connecté</h3>";
         }
     }
 }
