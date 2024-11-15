@@ -2,12 +2,23 @@
 
 namespace iutnc\nrv\action;
 
+use iutnc\nrv\auth\AuthnProvider;
+use iutnc\nrv\exception\AuthnException;
 use iutnc\nrv\repository\NrvRepository;
 
 class ModifySoireeAction extends Action
 {
     public function execute(): string
     {
+        try{
+            AuthnProvider::getSignInUser(); }
+        catch(AuthnException $e){
+            return "<h3>Pas authentifier</h3>";
+        }
+
+        if (AuthnProvider::getUserDroit() == 1) {
+            return "<h3>Vous n'avez pas accès a la création de la soirée !</h3>";
+        }
         $selectedSoireeId = $_GET['ID_SOIREE'] ?? null;
 
 
