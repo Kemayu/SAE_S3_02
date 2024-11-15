@@ -1,15 +1,11 @@
 .box {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
 }
-.box p {
-    grid-column: span 2; 
-    grid-row: span 1;  
-    grid-column: 1 / -1;  
-}
+
 .items {
-    background-color: blue;
+    background-color: antiquewhite;
     padding: 20px;
     border: 1px solid #24308c;
     border-radius: 1em;
@@ -19,8 +15,10 @@
 }
 
 .items img {
-    width: 100%;
-    border-radius: 1em;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 55vh;
 }
 
 .mon-titre, .description-titre {

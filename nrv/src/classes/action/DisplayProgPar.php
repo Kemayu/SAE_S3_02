@@ -22,7 +22,7 @@ class DisplayProgPar extends Action
             };
             if($connect){
                 $html = <<<END
-                <form method="get" action="?action=Display-Par">
+                <form method="get" action="?action=display-par">
                     <select name=lst>
                 END;
 
@@ -32,7 +32,7 @@ class DisplayProgPar extends Action
 
                 $html .= <<<END
                     </select>
-                    <input type="hidden" name="action" value="Display-Par">
+                    <input type="hidden" name="action" value="display-par">
                     <button type="submit">Afficher</button>
                     </form>
                 END;
@@ -46,12 +46,12 @@ class DisplayProgPar extends Action
                 case "DATE_SPECTACLE" :
                     if(!isset($_GET['date'])){
                         $html = <<<END
-                        <form method="get" action="?action=Display-par">
+                        <form method="get" action="?action=display-par">
                         <input type="hidden" name="lst" value=$val>
                         <label for="date">Date de la journée :</label>
                         <input type="date" name="date" required><br>
                         </select>
-                        <input type="hidden" name="action" value="Display-Par">
+                        <input type="hidden" name="action" value="display-par">
                         <button type="submit">Afficher</button>
                         </form>
                         END;
@@ -62,7 +62,7 @@ class DisplayProgPar extends Action
                 case "NOM_LIEU" :
                     if(!isset($_GET['lieu'])){
                         $html = <<<END
-                        <form method="get" action="?action=Display-Par">
+                        <form method="get" action="?action=display-par">
                         <input type="hidden" name="lst" value=$val>
                         <select name=lieu>
                     END;
@@ -75,7 +75,7 @@ class DisplayProgPar extends Action
 
                     $html .= <<<END
                         </select>
-                        <input type="hidden" name="action" value="Display-Par">
+                        <input type="hidden" name="action" value="display-par">
                         <button type="submit">Afficher</button>
                         </form>
                     END;
@@ -87,7 +87,7 @@ class DisplayProgPar extends Action
                 case "STYLE_MUSIQUE" :
                     if(!isset($_GET['style'])){
                         $html = <<<END
-                        <form method="get" action="?action=Display-Par">
+                        <form method="get" action="?action=display-par">
                         <input type="hidden" name="lst" value=$val>
                         <select name=style>
                     END;
@@ -99,7 +99,7 @@ class DisplayProgPar extends Action
 
                     $html .= <<<END
                         </select>
-                        <input type="hidden" name="action" value="Display-Par">
+                        <input type="hidden" name="action" value="display-par">
                         <button type="submit">Afficher</button>
                         </form>
                     END;
@@ -108,11 +108,13 @@ class DisplayProgPar extends Action
                 }
                 break;
             }
+            $html.="<div class = 'box'>";
             forEach($array as $spectacle){
-                $renderer = new render\RenderSpectacle(new objets\Spectacle($spectacle["ID_SPECTACLE"],$spectacle["TITRE_SPECTACLE"],$spectacle["DESCRIPTION_SPECTACLE"],$spectacle["IMAGE_SPECTACLE"],$spectacle["EXTRAIT_SPECTACLE"],$spectacle["DATE_SPECTACLE"],$spectacle["HORAIRE_SPECTACLE"],$spectacle["DUREE_SPECTACLE"],$spectacle["STYLE_MUSIQUE"],$spectacle["TARIF_SPECTACLE"]));
+                $renderer = new render\RenderSpectacle(new objets\Spectacle((int)$spectacle["ID_SPECTACLE"],$spectacle["TITRE_SPECTACLE"],$spectacle["DESCRIPTION_SPECTACLE"],$spectacle["IMAGE_SPECTACLE"],$spectacle["EXTRAIT_SPECTACLE"],$spectacle["DATE_SPECTACLE"],$spectacle["HORAIRE_SPECTACLE"],$spectacle["DUREE_SPECTACLE"],$spectacle["STYLE_MUSIQUE"],$spectacle["TARIF_SPECTACLE"]));
                 $html.= $renderer->render(1);
                 $html.="</br></br>";
             }
+            $html.="</div>";
             if (count($array) === 0 and isset($_GET["date"])){
                 $html.= "pas de spectacle à cette date..";
             }
