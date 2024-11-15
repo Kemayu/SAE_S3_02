@@ -14,13 +14,6 @@ class DisplayProgPar extends Action
     {
         
         if(!isset($_GET['lst']) and !isset($_GET['date']) and !isset($_GET['lieu'])){
-            $connect = true;
-            try{
-                auth\AuthnProvider::getSignInUser();
-            }catch(exception\AuthnException $e){
-                $html = $e->getMEssage(); $connect = false;
-            };
-            if($connect){
                 $html = <<<END
                 <form method="get" action="?action=display-par">
                     <select name=lst>
@@ -36,7 +29,6 @@ class DisplayProgPar extends Action
                     <button type="submit">Afficher</button>
                     </form>
                 END;
-            }
         }else{
             $val = $_GET['lst'];
             $repo = \iutnc\nrv\repository\NrvRepository::getInstance();

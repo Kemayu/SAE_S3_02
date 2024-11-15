@@ -136,6 +136,7 @@ class Dispatcher
             <div class="categ-content">
                 <a href="?action=display-sorted">Afficher de manière triée</a>
                 <a href="?action=display-par">Afficher de manière par...</a>
+                <a href="?action=display-preference">Afficher mes préférences</a>
             </div>
         </li>
         
@@ -195,6 +196,7 @@ HEAD;
             <div class="categ-content">
                 <a href="?action=display-sorted">Afficher de manière triée</a>
                 <a href="?action=display-par">Afficher de manière par...</a>
+                <a href="?action=display-preference">Afficher mes préférences</a>
             </div>
         </li>
         
@@ -233,6 +235,7 @@ HEAD;
             <div class="categ-content">
                 <a href="?action=display-sorted">Afficher de manière triée</a>
                 <a href="?action=display-par">Afficher de manière par...</a>
+                <a href="?action=display-preference">Afficher mes préférences</a>
             </div>
         </li>
         

@@ -56,10 +56,6 @@ class ModifySpectacleAction extends Action
             <form method="POST" action="?action=modify-spectacle">
                 <input type="hidden" name="ID_SPECTACLE" value="{$spectacle['ID_SPECTACLE']}">
 
-                <label>Date du spectacle
-                    <input type="date" name="date" value="{$spectacle['DATE_SPECTACLE']}">
-                </label><br>
-
                 <label>Horaire du spectacle
                     <input type="time" name="horaire" value="{$spectacle['HORAIRE_SPECTACLE']}">
                 </label><br>
@@ -101,7 +97,6 @@ class ModifySpectacleAction extends Action
         if ($this->http_method === 'POST') {
             NrvRepository::getInstance()->updateSpectacle(
                 $_POST['ID_SPECTACLE'],
-                $_POST['date'],
                 $_POST['horaire'],
                 $_POST['duree'],
                 $_POST['tarifs'],
