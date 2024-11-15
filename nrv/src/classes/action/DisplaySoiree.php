@@ -7,7 +7,7 @@ use iutnc\nrv\auth as auth;
 use iutnc\nrv\exception as exception;
 use iutnc\nrv\objets as objets;
 //Classe pour gerer l'affichage d'une playlist
-class DisplaySpectacle extends Action
+class DisplaySoiree extends Action
 {
 
     public function execute(): string
@@ -21,23 +21,35 @@ class DisplaySpectacle extends Action
         };
         if($connect){
             $repo = \iutnc\nrv\repository\NrvRepository::getInstance();
-            $soiree = $repo->getSoireeById($_GET["id"]);
-            $spectacles = $repo->getSpectacleSoiree($repo->getSoireeSpectacle((int)$spectacle["ID_SPECTACLE"]));
-            $html.="<div class = box>";
-            forEach($soiree as $soir){
-                $specs = $repo->getSpectacleById($spec["id_spectacle"]);
-                $renderer = new render\RenderSoiree(new objets\Soiree((int)$soir["nom_soiree"],$soirs["date_soiree"],$soir["thematique"],$soir["horaire_soiree"]));
-                $html.= $renderer->render(3);
+            if((!isset($_GET['idSoiree']))){
+                $html = <<<END
+                <form method="get" action="?action=display-soiree">
+                    <select name=idSoiree>
+                END;
+    
+                $soirees = $repo->getAllIdNameSoiree();
+                foreach($soirees as $s){
+                    $html .= "<option value={$s['ID_SOIREE']}> {$s['NOM_SOIREE']}</option>";
+                }
+    
+                $html .= <<<END
+                    </select>
+                    <input type="hidden" name="action" value="display-soiree">
+                    <button type="submit">Afficher</button>
+                    </form>
+                END;
+            }else{
+                $soiree = $repo->getSoireeById($_GET["idSoiree"]);
+                $html.="<div class = box>";
+                $renderer = new render\RenderSoiree(new objets\Soiree($soiree["NOM_SOIREE"],$soiree["DATE_SOIREE"],$soiree["THEMATIQUE"],$soiree["HORAIRE_DEBUT"]));
+                $html.= $renderer->render(1);
             }
 
-            $html.="</div><div class = 'spectacle'>";
-            
-
-            $renderer = new render\RenderSpectacle(new objets\Spectacle((int)$spectacle["ID_SPECTACLE"],$spectacle["TITRE_SPECTACLE"],$spectacle["DESCRIPTION_SPECTACLE"],$spectacle["IMAGE_SPECTACLE"],$spectacle["EXTRAIT_SPECTACLE"],$spectacle["DATE_SPECTACLE"],$spectacle["HORAIRE_SPECTACLE"],$spectacle["DUREE_SPECTACLE"],$spectacle["STYLE_MUSIQUE"],$spectacle["TARIF_SPECTACLE"]));
-            $html.= $renderer->render(2);
-            $html.="</br></br></div>";
+                $html.="</div>";
+                
 
         }
+
     return $html;
     }
 }

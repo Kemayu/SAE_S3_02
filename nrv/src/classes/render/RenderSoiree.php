@@ -8,14 +8,13 @@ class RenderSoiree implements renderer{
         $this->soir= $soir;
     }
 
-    public function render($type): string
+    public function render(int $type): string
     {
         return "
-        <div>
-            <h3 id='nom-soiree'>{$this->soir->nom}</h3>
-            <p id='thematique-soiree'>{$this ->soir->thematique} </p>
-            <h2>{$this->soir->nom} - {$this->soir->date}</h2>
-            <p>{$this ->soir->heure_debut} </p>
+        <div class = soiree>
+            <h2>{$this->soir->__get('nom')} - {$this->soir->__get('date')}</h2>
+            <p id='thematique-soiree'>{$this ->soir->__get('thematique')} </p>
+            <p>{$this ->soir->__get('heure_debut')} </p>
         </div>
         ";
     }
