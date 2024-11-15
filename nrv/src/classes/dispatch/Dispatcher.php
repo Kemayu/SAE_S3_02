@@ -54,6 +54,9 @@ class Dispatcher
             case 'display-spec':
                     $action = new act\DisplaySpectacle();
                     break;
+            case 'display-soiree':
+                $action = new act\DisplaySoiree();
+                break;
             case 'cancel-spectacle':
                 $action = new act\CancelSpectacleAction();
                 break;
@@ -131,8 +134,9 @@ class Dispatcher
         <li class="categ">
             <a href="#" class="dropbtn">Afficher le programme</a>
             <div class="categ-content">
-                <a href="?action=display-sorted">Afficher de manière triée</a>
-                <a href="?action=display-par">Afficher de manière par...</a>
+                <a href="?action=display-sorted">Afficher les spectacles de manière triée</a>
+                <a href="?action=display-par">Afficher les spectacles par...</a>
+                <a href="?action=display-soiree">Afficher une soiree</a>
                 <a href="?action=display-preference">Afficher mes préférences</a>
             </div>
         </li>
