@@ -58,6 +58,14 @@ class NrvRepository{
         return $spectacle;
     }
 
+    public function getSoireeById(int $idSoiree) : array{
+        $stmt = $this->pdo->prepare("select * from soiree where ID_SOIREE = :idSoiree");
+        $stmt->bindParam(':idSoiree',$idSoiree);
+        $stmt->execute();
+        $soiree = $stmt->fetch();
+        return $soiree;
+    }
+
     //Fonction pour s'enregistrer
     public function register(String $name, String $tel, String $email,string $password):void{
         $sql ="insert into utilisateur(NOM_UTILISATEUR,EMAIL_UTILISATEUR,TELEPHONE_UTILISATEUR,PASSWORD_UTILISATEUR,DROIT_UTILISATEUR) values(:nom,:email,:tel,:pwd,:role)";
@@ -143,13 +151,13 @@ class NrvRepository{
         return $lieux;
     }
 
-    public function createSoiree(String $name, String $thematique, String $date, String $horraire, int $idlieu):void{
-        $sql ="insert into Soiree(NOM_SOIREE,DATE_SOIREE,THEMATIQUE,HORAIRE_DEBUT,ID_LIEU) values(:nom,:thematique,:date,:horraire, :idlieu)";
+    public function createSoiree(String $name, String $thematique, String $date, String $horaire, int $idlieu):void{
+        $sql ="insert into Soiree(NOM_SOIREE,DATE_SOIREE,THEMATIQUE,HORAIRE_DEBUT,ID_LIEU) values(:nom,:thematique,:date,:horaire, :idlieu)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindParam(':nom',$name);
         $stmt->bindParam(':date',$date);
         $stmt->bindParam(':thematique',$thematique);
-        $stmt->bindParam(':horraire',$horraire);
+        $stmt->bindParam(':horaire',$horaire);
         $stmt->bindParam(':idlieu',$idlieu);
         $stmt->execute();
         }
@@ -164,11 +172,11 @@ class NrvRepository{
 
 
     public function createSpectacle(String $date, String $h, int $duree, float $tarifs,String $e, String $t,String $d,String $i,String $s):void{
-        $sql ="insert into spectacle(DATE_SPECTACLE , HORAIRE_SPECTACLE, DUREE_SPECTACLE , TARIF_SPECTACLE , EXTRAIT_SPECTACLE , TITRE_SPECTACLE , DESCRIPTION_SPECTACLE, IMAGE_SPECTACLE ,STYLE_MUSIQUE) values(:date,:horraire,:duree,:tarifs,:extrait,:titre,:description,:image,:style)";
+        $sql ="insert into spectacle(DATE_SPECTACLE , HORAIRE_SPECTACLE, DUREE_SPECTACLE , TARIF_SPECTACLE , EXTRAIT_SPECTACLE , TITRE_SPECTACLE , DESCRIPTION_SPECTACLE, IMAGE_SPECTACLE ,STYLE_MUSIQUE) values(:date,:horaire,:duree,:tarifs,:extrait,:titre,:description,:image,:style)";
         $stmt = $this->pdo->prepare($sql);
 
         $stmt->bindParam(':date',$date);
-        $stmt->bindParam(':horraire',$h);
+        $stmt->bindParam(':horaire',$h);
         $stmt->bindParam(':duree',$duree);
         $stmt->bindParam(':tarifs',$tarifs);
         $stmt->bindParam(':extrait',$e);
@@ -229,25 +237,27 @@ class NrvRepository{
         $infos = $stmt->fetchColumn();
         return $infos;
     }
-    public function StatusSpectacle(int $id_spectacle):void{
+    public function setStatusSpectacle(int $id_spectacle):void{
         $sql = "UPDATE SPECTACLE SET DESCRIPTION_SPECTACLE = '2E' where id_spectacle = :ID_SPECTACLE ";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindParam(':ID_SPECTACLE',$id_spectacle);
         $stmt->execute();
     }
-    public function ModifySoiree(int $id_soiree, String $name, String $date, String $thematique , String $horraire, int $idlieu):void{
+    public function updateSoiree(int $id_soiree, String $name, String $date, String $thematique , String $horaire, int $idlieu):void{
         $sql ="
-            UPDATE SOIREE SET NOM_SOIREE = :nom where id_soiree = :id_soiree;
-            UPDATE SOIREE SET DATE_SOIREE = :date where id_soiree = :id_soiree;
-            UPDATE SOIREE SET THEMATIQUE = :thematique where id_soiree = :id_soiree;
-            UPDATE SOIREE SET HORRAIRE_DEBUT = :horraire where id_soiree = :id_soiree;
-            UPDATE SOIREE SET ID_LIEU = :idlieu where id_soiree = :id_soiree;";
+            UPDATE SOIREE SET
+               NOM_SOIREE = :nom,
+               DATE_SOIREE = :date ,
+               THEMATIQUE = :thematique ,
+               HORAIRE_DEBUT = :horaire ,
+               ID_LIEU = :idlieu 
+            where ID_SOIREE = :id_soiree";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindParam(':id_soiree',$id_soiree);
         $stmt->bindParam(':nom',$name);
         $stmt->bindParam(':date',$date);
         $stmt->bindParam(':thematique',$thematique);
-        $stmt->bindParam(':horraire',$horraire);
+        $stmt->bindParam(':horaire',$horaire);
         $stmt->bindParam(':idlieu',$idlieu);
         $stmt->execute();
     }

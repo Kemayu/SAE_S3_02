@@ -28,7 +28,7 @@ class CancelSpectacleAction extends Action
             END;
 
         } else {
-            NrvRepository::getInstance()->StatusSpectacle($_POST['ID_SOIREE']);
+            NrvRepository::getInstance()->setStatusSpectacle($_POST['ID_SOIREE']);
             $html = "Spectacle Annulé";
         }
         return $html;
