@@ -89,8 +89,14 @@ class NrvRepository{
         return $id;
     }
 
-    public function getAllIdNomUserNotAdmin():array{
-        $stmt = $this ->pdo->prepare("select ID_UTILISATEUR, NOM_UTILISATEUR from utilisateur where DROIT_UTILISATEUR  != 50");
+    public function getAllIdNomUserNotAdminAndOrganisator():array{
+        $stmt = $this ->pdo->prepare("select ID_UTILISATEUR, NOM_UTILISATEUR from utilisateur where DROIT_UTILISATEUR  = 1 ");
+        $stmt->execute();
+        $infos = $stmt->fetchAll();
+        return $infos;
+    }
+    public function getAllIdNomUserOrganisator():array{
+        $stmt = $this ->pdo->prepare("select ID_UTILISATEUR, NOM_UTILISATEUR from utilisateur where DROIT_UTILISATEUR  = 15 ");
         $stmt->execute();
         $infos = $stmt->fetchAll();
         return $infos;
@@ -275,6 +281,17 @@ class NrvRepository{
         $stmt->execute();
     }
 
+    public function setUserRole($idUser, $role):void{
+        $sql ="
+            UPDATE UTILISATEUR SET
+               DROIT_UTILISATEUR = :role
+            where ID_UTILISATEUR = :id_user";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':id_user',$idUser);
+        $stmt->bindParam(':role',$role);
+        $stmt->execute();
+    }
+
     public function updateSoiree(int $id_soiree, String $name, String $date, String $thematique , String $horaire, int $idlieu):void{
         $sql ="
             UPDATE SOIREE SET
@@ -291,16 +308,6 @@ class NrvRepository{
         $stmt->bindParam(':thematique',$thematique);
         $stmt->bindParam(':horaire',$horaire);
         $stmt->bindParam(':idlieu',$idlieu);
-        $stmt->execute();
-    }
-
-    public function updateUserRole($idUser):void{
-        $sql ="
-            UPDATE UTILISATEUR SET
-               DROIT_UTILISATEUR = 50,
-            where ID_UTILISATEUR = :id_user";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':id_user',$idUser);
         $stmt->execute();
     }
 

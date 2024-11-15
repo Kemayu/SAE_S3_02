@@ -63,6 +63,9 @@ class Dispatcher
             case 'add-organisator':
                 $action = new act\AddOrganisatorAction();
                 break;
+            case 'remove-organisator':
+                $action = new act\RemoveOrganisatorAction();
+                break;
             default :
                 $action = new act\DefaultAction();
                 break;
@@ -131,6 +134,7 @@ class Dispatcher
             <a href="#" class="dropbtn">Utilisateur</a>
             <div class="categ-content">
                 <a href="?action=add-organisator"> Ajouter un organisateur</a>
+                <a href="?action=remove-organisator">Retiré un organisateur</a>
                 <a href="?action=register">S'enregistrer</a>
                 <a href="?action=signin">Se connecter</a>
                 <a href="?action=disconnect">Se déconnecter</a>

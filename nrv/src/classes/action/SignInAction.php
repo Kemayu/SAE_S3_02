@@ -14,7 +14,7 @@ class SignInAction extends Action
         if($this->http_method  === 'GET'){
             $html = <<<END
             <form method = "post" action = "?action=signin">
-                <label>Email <input type="text" name="email" placeholder="email"></label></br>
+                <label>Email <input type="email" name="email" placeholder="email"></label></br>
                 <label>Mot de passe <input type="password" name="mdp" placeholder="mot de passe"></label>
                 <button type="submit">connexion</button>
             </form>
@@ -25,9 +25,8 @@ class SignInAction extends Action
                 auth\AuthnProvider::signin($_POST['email'],$_POST['mdp']);
                 $html = "<div>vous êtes connecté, bienvenue ".unserialize($_SESSION['user'])->email."</div>";
             } catch(exception\AuthnException $e){
-                $html = "erreur lors de la connexion";
+                $html = "<h3>erreur lors de la connexion</h3>";
             }
-
 
         }
          return $html;
