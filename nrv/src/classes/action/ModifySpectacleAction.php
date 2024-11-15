@@ -17,7 +17,7 @@ class ModifySpectacleAction extends Action
         }
 
         if (AuthnProvider::getUserDroit() == 1) {
-            return "<h3>Vous n'avez pas accès a la création de la soirée !</h3>";
+            return "<h3>Vous n'avez pas accès a la modification de soirée !</h3>";
         }
         // Récupérer l'ID du spectacle sélectionné dans la requête GET (si disponible)
         $selectedSpectacleId = $_GET['ID_SPECTACLE'] ?? null;

@@ -17,7 +17,7 @@ class CancelSpectacleAction extends Action
         }
 
         if (AuthnProvider::getUserDroit() == 1) {
-            return "<h3>Vous n'avez pas accès a la création de la soirée !</h3>";
+            return "<h3>Vous n'avez pas accès a l'annulation de spectacle !</h3>";
         }
         if (NrvRepository::getInstance()->getNbSpectaclePasAnnule() === 0) {
             return "Tous les spectacles sont annulés";

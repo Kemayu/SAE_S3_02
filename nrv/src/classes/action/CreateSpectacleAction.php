@@ -17,7 +17,7 @@ class CreateSpectacleAction extends Action
         }
 
         if (AuthnProvider::getUserDroit() == 1) {
-            return "<h3>Vous n'avez pas accès a la création de la soirée !</h3>";
+            return "<h3>Vous n'avez pas accès a la création de spectacle !</h3>";
         }elseif($this->http_method  === 'GET') {
             $html = <<<END
             <form method = "post" action = "?action=create-spectacle"><br>

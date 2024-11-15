@@ -17,7 +17,7 @@ class ModifySoireeAction extends Action
         }
 
         if (AuthnProvider::getUserDroit() == 1) {
-            return "<h3>Vous n'avez pas accès a la création de la soirée !</h3>";
+            return "<h3>Vous n'avez pas accès a la modification de soirée !</h3>";
         }
         $selectedSoireeId = $_GET['ID_SOIREE'] ?? null;
 
