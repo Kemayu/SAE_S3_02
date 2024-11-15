@@ -9,11 +9,12 @@
     grid-column: 1 / -1;
 }
 .items {
-    background-color: blue;
+    background-color: rgb(244, 244, 244);
     padding: 20px;
     border: 1px solid #24308c;
+    border-width: 10px;
     border-radius: 1em;
-    color: white;
+    color: black;
     text-align: center;
     box-sizing: border-box;
 }
@@ -24,8 +25,11 @@
         background-size: cover;
     height: 55vh;
 }
+.items p {
+    color:black;
+}
 
 .mon-titre, .description-titre {
-    color: white;
+    color: black;
 }
 

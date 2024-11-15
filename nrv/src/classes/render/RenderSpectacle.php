@@ -23,6 +23,21 @@ class RenderSpectacle implements renderer{
                 return "Type de rendu inconnu";
         }
     }
+    
+
+    public function renderSoiree(): string
+    {
+        $id = (String)$this->spec->id;
+        $url= "?id=". $id;
+        $url.="&action=display-spec";
+        return "
+        <div class = 'items'>
+            <h3 class='mon-titre' aria-describedby='description-titre'>{$this->spec->titre} </h3>
+            <a href = $url><img class='img' src='{$this->spec->image}' alt='Affiche' width='300' height='400'></a>
+        </div>
+        ";
+    }
+
 
     public function renderCompact(): string
     {

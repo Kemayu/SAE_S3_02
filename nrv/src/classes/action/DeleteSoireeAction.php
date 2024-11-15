@@ -2,13 +2,23 @@
 
 namespace iutnc\nrv\action;
 
+use iutnc\nrv\auth\AuthnProvider;
+use iutnc\nrv\exception\AuthnException;
 use iutnc\nrv\repository\NrvRepository;
 
 class DeleteSoireeAction extends Action
 {
     public function execute(): string
     {
-        if ($this->http_method  === 'GET') {
+        try{
+            AuthnProvider::getSignInUser(); }
+        catch(AuthnException $e){
+            return "<h3>Pas authentifier</h3>";
+        }
+
+        if (AuthnProvider::getUserDroit() == 1) {
+            return "<h3>Vous n'avez pas accès a la création de la soirée !</h3>";
+        } elseif($this->http_method  === 'GET') {
             $html = <<<END
             <form method = "post" action = "?action=delete-soiree"><br>
                

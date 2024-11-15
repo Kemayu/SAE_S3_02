@@ -53,6 +53,13 @@ class AuthnProvider
         }
         throw new exception\AuthnException("pas authentifié");
     }
+    public static function getUserDroit(): string{
+        if (isset($_SESSION['user'])){
+            return unserialize($_SESSION['user'])->role;
+        }
+        throw new exception\AuthnException("pas authentifié");
+    }
+
  }
 
 

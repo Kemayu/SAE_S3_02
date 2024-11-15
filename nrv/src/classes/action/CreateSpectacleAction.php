@@ -2,13 +2,23 @@
 
 namespace iutnc\nrv\action;
 
+use iutnc\nrv\auth\AuthnProvider;
+use iutnc\nrv\exception\AuthnException;
 use iutnc\nrv\repository\NrvRepository;
 
 class CreateSpectacleAction extends Action
 {
     public function execute(): string
     {
-        if ($this->http_method  === 'GET') {
+        try{
+            AuthnProvider::getSignInUser(); }
+        catch(AuthnException $e){
+            return "<h3>Pas authentifier</h3>";
+        }
+
+        if (AuthnProvider::getUserDroit() == 1) {
+            return "<h3>Vous n'avez pas accès a la création de la soirée !</h3>";
+        }elseif($this->http_method  === 'GET') {
             $html = <<<END
             <form method = "post" action = "?action=create-spectacle"><br>
                <label>Date du spectacle<input type="date" name="date"></label><br>
@@ -38,7 +48,7 @@ class CreateSpectacleAction extends Action
 
         } else {
             NrvRepository::getInstance()->createSpectacle($_POST['date'],$_POST['horraire'],$_POST['duree'],$_POST['tarifs'],$_POST['extrait'],$_POST['titre'],$_POST['description'],$_POST['image'],$_POST['style']);
-            NrvRepository::getInstance()->createLinkSoireeSpectacle(NrvRepository::getInstance()->getLastIdSpectacle(),$_POST['ID_SOIREE']);
+            NrvRepository:: getInstance()->createLinkSoireeSpectacle(NrvRepository::getInstance()->getLastIdSpectacle(),$_POST['ID_SOIREE']);
             $html = "Spectacle créé";
             }
         return $html;
