@@ -14,10 +14,10 @@ class RegisterAction extends Action
         if($this->http_method  === 'GET'){
             $html = <<<END
             <form method = "post" action = "?action=register">
-                <label>Nom d'Utilisateur <input type="text" name="usr" placeholder="Nom d'Utilisateur"></label>
-                <label>Numero de telephone <input type="text" name="tel" placeholder="06 ..."></label>
-                <label>Email <input type="text" name="email" placeholder="email"></label><br>
-                <label>Mot de passe <input type="password" name="mdp" placeholder="mot de passe"></label>
+                <label>Nom d'Utilisateur <input class=in type="text" name="usr" placeholder="Nom d'Utilisateur"></label>
+                <label>Numero de telephone <input class=in type="text" name="tel" placeholder="06 ..."></label>
+                <label>Email <input class=in type="text" name="email" placeholder="email"></label>
+                <label>Mot de passe <input class=in type="password" name="mdp" placeholder="mot de passe"></label>
                 <button type="submit">Créer</button>
             </form>
             END;

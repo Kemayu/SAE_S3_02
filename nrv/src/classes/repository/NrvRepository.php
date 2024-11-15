@@ -50,22 +50,6 @@ class NrvRepository{
         return[false,$passwd];
     }
 
-    public function getSpectacleById(int $idSpec) : array{
-        $stmt = $this->pdo->prepare("select * from spectacle where id_spectacle = :idS");
-        $stmt->bindParam(':idS',$idSpec);
-        $stmt->execute();
-        $spectacle = $stmt->fetch();
-        return $spectacle;
-    }
-
-    public function getSoireeById(int $idSoiree) : array{
-        $stmt = $this->pdo->prepare("select * from soiree where ID_SOIREE = :idSoiree");
-        $stmt->bindParam(':idSoiree',$idSoiree);
-        $stmt->execute();
-        $soiree = $stmt->fetch();
-        return $soiree;
-    }
-
     //Fonction pour s'enregistrer
     public function register(String $name, String $tel, String $email,string $password):void{
         $sql ="insert into utilisateur(NOM_UTILISATEUR,EMAIL_UTILISATEUR,TELEPHONE_UTILISATEUR,PASSWORD_UTILISATEUR,DROIT_UTILISATEUR) values(:nom,:email,:tel,:pwd,:role)";
@@ -78,6 +62,7 @@ class NrvRepository{
         $stmt->bindParam(':role',$role);
         $stmt->execute();
     }
+
     //Getter de l'id de l'utilisateur
     public function getIdUser(String $email):int{
         $stmt = $this ->pdo->prepare("select id_utilisateur from utilisateur where email_utilisateur = ?");
@@ -103,7 +88,14 @@ class NrvRepository{
         $id = $stmt->fetchColumn();
         return $id;
     }
-    //
+
+    public function getAllIdNomUserNotAdmin():array{
+        $stmt = $this ->pdo->prepare("select ID_UTILISATEUR, NOM_UTILISATEUR from utilisateur where DROIT_UTILISATEUR  != 50");
+        $stmt->execute();
+        $infos = $stmt->fetchAll();
+        return $infos;
+    }
+
     public function findProgramSorted(String $val): array {
         $colonnes_autorisees = ['DATE_SPECTACLE', 'NOM_LIEU', 'STYLE_MUSIQUE'];
 
@@ -162,6 +154,30 @@ class NrvRepository{
         $stmt->execute();
         }
 
+    public function deleteSoiree(int $id):void{
+        $sql ="DELETE FROM SOIREE WHERE id_soiree = :ID_SOIREE";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':ID_SOIREE',$id);
+        $stmt->execute();
+
+    }
+
+    public function getSoireeById(int $idSoiree) : array{
+        $stmt = $this->pdo->prepare("select * from soiree where ID_SOIREE = :idSoiree");
+        $stmt->bindParam(':idSoiree',$idSoiree);
+        $stmt->execute();
+        $soiree = $stmt->fetch();
+        return $soiree;
+    }
+
+    public function getALlIdNameSoiree():array{
+        $sql = "select ID_SOIREE,NOM_SOIREE from SOIREE";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $infos = $stmt->fetchAll();
+        return $infos;
+    }
+
     public function getIdLieu() : array{
         $sql = "select ID_LIEU,NOM_LIEU from LIEU";
         $stmt = $this->pdo->prepare($sql);
@@ -169,7 +185,6 @@ class NrvRepository{
         $infos = $stmt->fetchAll();
         return $infos;
     }
-
 
     public function createSpectacle(String $date, String $h, int $duree, float $tarifs,String $e, String $t,String $d,String $i,String $s):void{
         $sql ="insert into spectacle(DATE_SPECTACLE , HORAIRE_SPECTACLE, DUREE_SPECTACLE , TARIF_SPECTACLE , EXTRAIT_SPECTACLE , TITRE_SPECTACLE , DESCRIPTION_SPECTACLE, IMAGE_SPECTACLE ,STYLE_MUSIQUE) values(:date,:horaire,:duree,:tarifs,:extrait,:titre,:description,:image,:style)";
@@ -188,13 +203,15 @@ class NrvRepository{
         $stmt->execute();
 
     }
-    public function getALlIdNameSoiree():array{
-        $sql = "select ID_SOIREE,NOM_SOIREE from SOIREE";
-        $stmt = $this->pdo->prepare($sql);
+
+    public function getSpectacleById(int $idSpec) : array{
+        $stmt = $this->pdo->prepare("select * from spectacle where id_spectacle = :idS");
+        $stmt->bindParam(':idS',$idSpec);
         $stmt->execute();
-        $infos = $stmt->fetchAll();
-        return $infos;
+        $spectacle = $stmt->fetch();
+        return $spectacle;
     }
+
 
     public function getLastIdSpectacle():int{
         $sql = "select MAX(ID_SPECTACLE) from SPECTACLE ";
@@ -202,6 +219,23 @@ class NrvRepository{
         $stmt->execute();
         $infos = $stmt->fetchColumn();
         return $infos;
+    }
+
+    public function getALlIdTitreDescriptionSpectacle():array{
+        $sql = "select ID_SPECTACLE,TITRE_SPECTACLE, DESCRIPTION_SPECTACLE from Spectacle";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $infos = $stmt->fetchAll();
+        return $infos;
+    }
+
+
+
+    public function getNbSpectaclePasAnnule() : int{
+        $stmt = $this ->pdo->prepare("select count(*) from Spectacle where DESCRIPTION_SPECTACLE != 'Annulé'");
+        $stmt->execute();
+        $nb = $stmt->fetchColumn();
+        return $nb;
     }
 
     public function createLinkSoireeSpectacle(int $idspectacle, int $idsoiree):void{
@@ -214,13 +248,7 @@ class NrvRepository{
         $stmt->execute();
 
     }
-    public function deleteSoiree(int $id):void{
-        $sql ="DELETE FROM SOIREE WHERE id_soiree = :ID_SOIREE";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':ID_SOIREE',$id);
-        $stmt->execute();
 
-    }
     public function deleteSoireeSpectacle(int $id_spectacle, int $id_soiree):void{
         $sql ="DELETE FROM SOIREE_SPECTACLE WHERE id_spectacle = :ID_SPECTACLE AND id_soiree = :ID_SOIREE";
         $stmt = $this->pdo->prepare($sql);
@@ -230,12 +258,23 @@ class NrvRepository{
 
     }
 
-    public function setStatusSpectacle(int $id_spectacle):void{
-        $sql = "UPDATE SPECTACLE SET DESCRIPTION_SPECTACLE = '2E' where id_spectacle = :ID_SPECTACLE ";
+
+    public function getIDSpectacleFromSpectacleSoiree(int $id_soiree):int{
+        $sql = "select ID_SPECTACLE from SOIREE_SPECTACLE where id_soiree = :ID_SOIREE";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':ID_SOIREE',$id_soiree);
+        $stmt->execute();
+        $infos = $stmt->fetchColumn();
+        return $infos;
+    }
+    public function setStatusSpectacle(int $id_spectacle, string $text):void{
+        $sql = "UPDATE SPECTACLE SET DESCRIPTION_SPECTACLE = :text where id_spectacle = :ID_SPECTACLE ";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindParam(':ID_SPECTACLE',$id_spectacle);
+        $stmt->bindParam(':text',$text);
         $stmt->execute();
     }
+
     public function updateSoiree(int $id_soiree, String $name, String $date, String $thematique , String $horaire, int $idlieu):void{
         $sql ="
             UPDATE SOIREE SET
@@ -255,12 +294,14 @@ class NrvRepository{
         $stmt->execute();
     }
 
-    public function getALlIdTitreSpectacle():array{
-        $sql = "select ID_SPECTACLE,TITRE_SPECTACLE from Spectacle";
+    public function updateUserRole($idUser):void{
+        $sql ="
+            UPDATE UTILISATEUR SET
+               DROIT_UTILISATEUR = 50,
+            where ID_UTILISATEUR = :id_user";
         $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':id_user',$idUser);
         $stmt->execute();
-        $infos = $stmt->fetchAll();
-        return $infos;
     }
 
     public function updateSpectacle(int $id, String $date, String $h, int $duree, int $tarif,String $e, String $t,String $d,String $i,String $s) : void

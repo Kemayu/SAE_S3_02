@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace iutnc\nrv\dispatch;
 
 use iutnc\nrv\action as act;
+use iutnc\nrv\auth\AuthnProvider;
+use iutnc\nrv\exception\AuthnException;
 
 //Classe dispatcher permettant de gerer les interactions avec le site
 class Dispatcher
@@ -58,16 +60,90 @@ class Dispatcher
             case 'modify-soiree':
                 $action = new act\ModifySoireeAction();
                 break;
+            case 'add-organisator':
+                $action = new act\AddOrganisatorAction();
+                break;
             default :
                 $action = new act\DefaultAction();
                 break;
         }
-        $html = $action->execute();
-        $this->renderPage($html);
+
+        try {
+            $html = $action->execute();
+
+            if (AuthnProvider::getUserDroit() == 15) {
+                $this->renderPageOrganisator($html);
+            }
+            elseif(AuthnProvider::getUserDroit() == 50) {
+                $this->renderPageAdmin($html);
+        }
+            elseif(AuthnProvider::getUserDroit() == 1) {
+                $this->renderPageUtilisateur($html);
+            }
+    }catch(AuthnException $e1){
+            $this->renderPageUtilisateur($html);}
     }
 
     //fonction permettant d'afficher la page web
-    private function renderPage(string $html): void
+    private function renderPageAdmin(string $html): void
+    {
+        echo <<<HEAD
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link href="css/style.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <title>NRV</title>
+</head>
+<body>
+    <ul id="nav">
+        <li id="navHome"><a href="?action=default">Accueil</a></li>
+    
+        
+        <li class="categ">
+            <a href="#" class="dropbtn">Gestion des soirées</a>
+            <div class="categ-content">
+                <a href="?action=add-soiree">Créer la soirée</a>
+                <a href="?action=modify-soiree">Modifier la soirée</a>
+                <a href="?action=delete-soiree">Supprimer la soirée</a>
+            </div>
+        </li>
+        
+        <li class="categ">
+            <a href="#" class="dropbtn">Gestion des spectacles</a>
+            <div class="categ-content">
+                <a href="?action=create-spectacle">Créer un spectacle</a>
+                <a href="?action=modify-spectacle">Modifier le spectacle</a>
+                <a href="?action=cancel-spectacle">Annuler le spectacle</a>
+                <a href="?action=display-spec">Afficher un spectacle</a>
+            </div>
+        </li>
+        
+        <li class="categ">
+            <a href="#" class="dropbtn">Afficher le programme</a>
+            <div class="categ-content">
+                <a href="?action=display-sorted">Afficher de manière triée</a>
+                <a href="?action=display-par">Afficher de manière par...</a>
+            </div>
+        </li>
+        
+        <li class="categ">
+            <a href="#" class="dropbtn">Utilisateur</a>
+            <div class="categ-content">
+                <a href="?action=add-organisator"> Ajouter un organisateur</a>
+                <a href="?action=register">S'enregistrer</a>
+                <a href="?action=signin">Se connecter</a>
+                <a href="?action=disconnect">Se déconnecter</a>
+            </div>
+        </li>
+    </ul>
+        $html
+</body>
+</html>
+HEAD;
+    }
+
+    private function renderPageOrganisator(string $html): void
     {
         echo <<<HEAD
 <!DOCTYPE html>
@@ -80,45 +156,85 @@ class Dispatcher
 </head>
 <body>
     <ul id="nav">
-    <li id="navHome"><a href="?action=default">Accueil</a></li>
-    
-    <li class="categ">
-        <a href="#" class="dropbtn">Gestion des soirées</a>
-        <div class="categ-content">
-            <a href="?action=add-soiree">Créer la soirée</a>
-            <a href="?action=modify-soiree">Modifier la soirée</a>
-            <a href="?action=delete-soiree">Supprimer la soirée</a>
-        </div>
-    </li>
-    
-    <li class="categ">
-        <a href="#" class="dropbtn">Gestion des spectacles</a>
-        <div class="categ-content">
-            <a href="?action=create-spectacle">Créer un spectacle</a>
-            <a href="?action=modify-spectacle">Modifier le spectacle</a>
-            <a href="?action=cancel-spectacle">Annuler le spectacle</a>
-            <a href="?action=display-spec">Afficher un spectacle</a>
-        </div>
-    </li>
-    
-    <li class="categ">
-        <a href="#" class="dropbtn">Afficher le programme</a>
-        <div class="categ-content">
-            <a href="?action=display-sorted">Afficher de manière triée</a>
-            <a href="?action=display-par">Afficher de manière par...</a>
-        </div>
-    </li>
-    
-    <li class="categ">
-        <a href="#" class="dropbtn">Utilisateur</a>
-        <div class="categ-content">
-            <a href="?action=register">S'enregistrer</a>
-            <a href="?action=signin">Se connecter</a>
-            <a href="?action=disconnect">Se déconnecter</a>
-        </div>
-    </li>
-</ul>
+        <li id="navHome"><a href="?action=default">Accueil</a></li>
+        
+        <li class="categ">
+            <a href="#" class="dropbtn">Gestion des soirées</a>
+            <div class="categ-content">
+                <a href="?action=add-soiree">Créer la soirée</a>
+                <a href="?action=modify-soiree">Modifier la soirée</a>
+                <a href="?action=delete-soiree">Supprimer la soirée</a>
+            </div>
+        </li>
+        
+        <li class="categ">
+            <a href="#" class="dropbtn">Gestion des spectacles</a>
+            <div class="categ-content">
+                <a href="?action=create-spectacle">Créer un spectacle</a>
+                <a href="?action=modify-spectacle">Modifier le spectacle</a>
+                <a href="?action=cancel-spectacle">Annuler le spectacle</a>
+                <a href="?action=display-spec">Afficher un spectacle</a>
+            </div>
+        </li>
+        
+        <li class="categ">
+            <a href="#" class="dropbtn">Afficher le programme</a>
+            <div class="categ-content">
+                <a href="?action=display-sorted">Afficher de manière triée</a>
+                <a href="?action=display-par">Afficher de manière par...</a>
+            </div>
+        </li>
+        
+        <li class="categ">
+            <a href="#" class="dropbtn">Utilisateur</a>
+            <div class="categ-content">
+                <a href="?action=register">S'enregistrer</a>
+                <a href="?action=signin">Se connecter</a>
+                <a href="?action=disconnect">Se déconnecter</a>
+            </div>
+        </li>
+    </ul>
+        $html
+</body>
+</html>
+HEAD;
+    }
 
+    private function renderPageUtilisateur(string $html): void
+    {
+        echo <<<HEAD
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link href="css/style.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <title>NRV</title>
+</head>
+<body>
+    <ul>
+         <ul id="nav">
+        <li id="navHome"><a href="?action=default">Accueil</a></li>
+        
+        <li class="categ">
+            <a href="#" class="dropbtn">Afficher le programme</a>
+            <div class="categ-content">
+                <a href="?action=display-sorted">Afficher de manière triée</a>
+                <a href="?action=display-par">Afficher de manière par...</a>
+            </div>
+        </li>
+        
+        <li class="categ">
+            <a href="#" class="dropbtn">Utilisateur</a>
+            <div class="categ-content">
+                <a href="?action=register">S'enregistrer</a>
+                <a href="?action=signin">Se connecter</a>
+                <a href="?action=disconnect">Se déconnecter</a>
+            </div>
+        </li>
+    </ul>
+         
+         
+    </ul>
         $html
 </body>
 </html>
