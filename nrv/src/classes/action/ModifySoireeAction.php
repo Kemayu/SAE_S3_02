@@ -17,7 +17,7 @@ class ModifySoireeAction extends Action
         }
 
         if (AuthnProvider::getUserDroit() == 1) {
-            return "<h3>Vous n'avez pas accès a la création de la soirée !</h3>";
+            return "<h3>Vous n'avez pas accès a la modification de soirée !</h3>";
         }
         $selectedSoireeId = $_GET['ID_SOIREE'] ?? null;
 
@@ -66,7 +66,7 @@ class ModifySoireeAction extends Action
                 </label><br>
 
                 <label>Horaire
-                    <input type="text" name="HORAIRE_DEBUT" value="{$soiree['HORAIRE_DEBUT']}">
+                    <input type="time" name="HORAIRE_DEBUT" value="{$soiree['HORAIRE_DEBUT']}">
                 </label><br>
                 <label>Lieu</label>  
                 <select name="ID_LIEU"">
@@ -106,7 +106,7 @@ class ModifySoireeAction extends Action
                 $_POST['ID_LIEU'],
 
             );
-            $html = "Soirée modifiée avec succès";
+            $html = "<h3>Soirée modifiée avec succès</h3>";
         }
 
         return $html;

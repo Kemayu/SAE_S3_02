@@ -15,8 +15,8 @@ class RegisterAction extends Action
             $html = <<<END
             <form method = "post" action = "?action=register">
                 <label>Nom d'Utilisateur <input type="text" name="usr" placeholder="Nom d'Utilisateur"></label>
-                <label>Numero de telephone <input type="text" name="tel" placeholder="06 ..."></label>
-                <label>Email <input type="text" name="email" placeholder="email"></label><br>
+                <label>Numero de telephone <input type="tel" name="tel" placeholder="06 ..."></label>
+                <label>Email <input type="email" name="email" placeholder="email"></label><br>
                 <label>Mot de passe <input type="password" name="mdp" placeholder="mot de passe"></label>
                 <button type="submit">Créer</button>
             </form>
@@ -25,7 +25,7 @@ class RegisterAction extends Action
         }else{
             try{
             auth\AuthnProvider::register($_POST['usr'],$_POST['tel'],$_POST['email'],$_POST['mdp']);
-            $html = "votre compte à été créé </div>";
+            $html = "<h3>votre compte à été créé</h3></div>";
             }catch(exception\AuthnException $e){
                 $html = $e->getMessage();
             }

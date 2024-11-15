@@ -88,7 +88,20 @@ class NrvRepository{
         $id = $stmt->fetchColumn();
         return $id;
     }
-    //
+
+    public function getAllIdNomUserNotAdminAndOrganisator():array{
+        $stmt = $this ->pdo->prepare("select ID_UTILISATEUR, NOM_UTILISATEUR from utilisateur where DROIT_UTILISATEUR  = 1 ");
+        $stmt->execute();
+        $infos = $stmt->fetchAll();
+        return $infos;
+    }
+    public function getAllIdNomUserOrganisator():array{
+        $stmt = $this ->pdo->prepare("select ID_UTILISATEUR, NOM_UTILISATEUR from utilisateur where DROIT_UTILISATEUR  = 15 ");
+        $stmt->execute();
+        $infos = $stmt->fetchAll();
+        return $infos;
+    }
+
     public function findProgramSorted(String $val): array {
         $colonnes_autorisees = ['DATE_SPECTACLE', 'NOM_LIEU', 'STYLE_MUSIQUE'];
 
@@ -271,6 +284,17 @@ class NrvRepository{
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindParam(':ID_SPECTACLE',$id_spectacle);
         $stmt->bindParam(':text',$text);
+        $stmt->execute();
+    }
+
+    public function setUserRole($idUser, $role):void{
+        $sql ="
+            UPDATE UTILISATEUR SET
+               DROIT_UTILISATEUR = :role
+            where ID_UTILISATEUR = :id_user";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':id_user',$idUser);
+        $stmt->bindParam(':role',$role);
         $stmt->execute();
     }
 

@@ -28,7 +28,7 @@ class CreateSoireeAction extends Action
             <label for="thematique">Thématique de la Soirée :</label>
             <input type="text" name="thematique" required><br>           
             <label for="horraire">Horraire de la Soirée</label>
-            <input type="text" name="horraire" required><br>
+            <input type="time" name="horraire" required><br>
             <select name="idlieu">
             END;
             $array = NrvRepository::getInstance()->getIdLieu();
@@ -47,7 +47,7 @@ class CreateSoireeAction extends Action
 
         } else {
             NrvRepository::getInstance()->createSoiree($_POST['name'], $_POST['date'], $_POST['thematique'], $_POST['horraire'], $_POST['idlieu']);
-            $html = "Soirée Crée";
+            $html = "<h3>Soirée Crée</h3>";
 
         }
         return $html;

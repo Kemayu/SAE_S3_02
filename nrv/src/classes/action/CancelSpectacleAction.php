@@ -17,7 +17,7 @@ class CancelSpectacleAction extends Action
         }
 
         if (AuthnProvider::getUserDroit() == 1) {
-            return "<h3>Vous n'avez pas accès a la création de la soirée !</h3>";
+            return "<h3>Vous n'avez pas accès a l'annulation de spectacle !</h3>";
         }
         if (NrvRepository::getInstance()->getNbSpectaclePasAnnule() === 0) {
             return "Tous les spectacles sont annulés";
@@ -46,7 +46,7 @@ class CancelSpectacleAction extends Action
         } else {
             $message = "Annulé";
             NrvRepository::getInstance()->setStatusSpectacle($_POST['ID_SPECTACLE'], $message);
-            $html = "Spectacle " . $message;
+            $html = "<h3>Spectacle $message</h3>";
         }
         return $html;
     }
