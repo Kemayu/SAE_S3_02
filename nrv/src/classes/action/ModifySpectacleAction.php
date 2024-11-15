@@ -12,7 +12,7 @@ class ModifySpectacleAction extends Action
         $selectedSpectacleId = $_GET['ID_SPECTACLE'] ?? null;
 
         // Charger la liste des spectacles pour le menu déroulant
-        $spectacles = NrvRepository::getInstance()->getALlIdTitreSpectacle();
+        $spectacles = NrvRepository::getInstance()->getALlIdTitreDescriptionSpectacle();
 
         // Charger les détails du spectacle sélectionné (si un ID est fourni)
         $spectacle = $selectedSpectacleId ?
