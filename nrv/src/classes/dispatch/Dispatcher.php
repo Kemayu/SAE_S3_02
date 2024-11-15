@@ -102,9 +102,7 @@ class Dispatcher
          <li><a href="?action=display-spec">TEMPORAIRE Afficher Spectacle</a></li>
          
     </ul>
-    <div class = "box">
         $html
-    </div>
 </body>
 </html>
 HEAD;

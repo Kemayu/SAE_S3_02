@@ -20,12 +20,13 @@ class DisplaySpectacle extends Action
             $html = $e->getMEssage(); $connect = false;
         };
         if($connect){
+            $html.="<div class = 'spectacle'>";
             $repo = \iutnc\nrv\repository\NrvRepository::getInstance();
             $spectacle = $repo->getSpectacleById($_GET["id"]);
 
             $renderer = new render\RenderSpectacle(new objets\Spectacle((int)$spectacle["ID_SPECTACLE"],$spectacle["TITRE_SPECTACLE"],$spectacle["DESCRIPTION_SPECTACLE"],$spectacle["IMAGE_SPECTACLE"],$spectacle["EXTRAIT_SPECTACLE"],$spectacle["DATE_SPECTACLE"],$spectacle["HORAIRE_SPECTACLE"],$spectacle["DUREE_SPECTACLE"],$spectacle["STYLE_MUSIQUE"],$spectacle["TARIF_SPECTACLE"]));
             $html.= $renderer->render(2);
-            $html.="</br></br>";
+            $html.="</br></br></div>";
         }
     return $html;
     }
