@@ -14,29 +14,18 @@ class RenderSpectacle implements renderer{
     {
         switch ($type) {
             case self::COMPACT:
-                print(self::COMPACT);
                 return $this->renderCompact() . "\n";
             case self::LONG:
-                print(self::LONG);
                 return $this->renderLong() . "\n";
+            case self::COURT:
+                return $this->renderCourt() . "\n";
             default:
                 return "Type de rendu inconnu";
         }
     }
     
 
-    public function renderSoiree(): string
-    {
-        $id = (String)$this->spec->id;
-        $url= "?id=". $id;
-        $url.="&action=display-spec";
-        return "
-        <div class = 'items'>
-            <h3 class='mon-titre' aria-describedby='description-titre'>{$this->spec->titre} </h3>
-            <a href = $url><img class='img' src='{$this->spec->image}' alt='Affiche' width='300' height='400'></a>
-        </div>
-        ";
-    }
+   
 
 
     public function renderCompact(): string
@@ -75,6 +64,18 @@ class RenderSpectacle implements renderer{
             <iframe width='560' height='315' src='{$this->spec->extrait}' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>
 
             
+        </div>
+        ";
+    }
+    public function renderCourt(): string
+    {
+        $id = (String)$this->spec->id;
+        $url= "?id=". $id;
+        $url.="&action=display-spec";
+        return "
+        <div class = 'items'>
+            <h3 class='mon-titre' aria-describedby='description-titre'>{$this->spec->titre} </h3>
+            <a href = $url><img class='img' src='{$this->spec->image}' alt='Affiche' width='300' height='400'></a>
         </div>
         ";
     }

@@ -73,34 +73,52 @@ class Dispatcher
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <link rel="shortcut icon" href="images/logo.png" type="image/png">
     <link href="css/style.css" rel="stylesheet" />
     <meta charset="UTF-8">
     <title>NRV</title>
 </head>
 <body>
-    <h1>NRV</h1>
-    <ul>
-         <li><a href="?action=default">Accueil</a></li>
-         <li>-----------</li>
-         <li><a href="?action=add-soiree">Creer la soirée</a></li>
-         <li><a href="?action=modify-spectacle">Modifier le spectacle</a></li>
-         <li><a href="?action=register">s'enregistrer</a></li>
-         <li><a href="?action=signin">se connecter</a></li>
-         <li><a href="?action=disconnect">Se deconnecter</a></li>
-         <li>-----------</li>
-         <li><a href="?action=add-soiree">Crée la soirée</a></li>
-         <li><a href="?action=create-spectacle">Creer un spectacle</a></li>
-         <li><a href="?action=cancel-spectacle">Annulé le spectacle</a></li>
-         <li>-----------</li>
-        <li><a href="?action=modify-soiree">Modifier la soirée</a></li>
-        <li>-----------</li>
-         <li><a href="?action=display-sorted">Afficher le programme de manière triée</a></li>
-         <li><a href="?action=display-par">Afficher le programme de manière par..</a></li>
-         <li><a href="?action=delete-soiree">Supprimé la Soirée</a></li>
-         
-         <li><a href="?action=display-spec">TEMPORAIRE Afficher Spectacle</a></li>
-         
-    </ul>
+    <ul id="nav">
+    <li id="navHome"><a href="?action=default">Accueil</a></li>
+    
+    <li class="categ">
+        <a href="#" class="dropbtn">Gestion des soirées</a>
+        <div class="categ-content">
+            <a href="?action=add-soiree">Créer la soirée</a>
+            <a href="?action=modify-soiree">Modifier la soirée</a>
+            <a href="?action=delete-soiree">Supprimer la soirée</a>
+        </div>
+    </li>
+    
+    <li class="categ">
+        <a href="#" class="dropbtn">Gestion des spectacles</a>
+        <div class="categ-content">
+            <a href="?action=create-spectacle">Créer un spectacle</a>
+            <a href="?action=modify-spectacle">Modifier le spectacle</a>
+            <a href="?action=cancel-spectacle">Annuler le spectacle</a>
+            <a href="?action=display-spec">Afficher un spectacle</a>
+        </div>
+    </li>
+    
+    <li class="categ">
+        <a href="#" class="dropbtn">Afficher le programme</a>
+        <div class="categ-content">
+            <a href="?action=display-sorted">Afficher de manière triée</a>
+            <a href="?action=display-par">Afficher de manière par...</a>
+        </div>
+    </li>
+    
+    <li class="categ">
+        <a href="#" class="dropbtn">Utilisateur</a>
+        <div class="categ-content">
+            <a href="?action=register">S'enregistrer</a>
+            <a href="?action=signin">Se connecter</a>
+            <a href="?action=disconnect">Se déconnecter</a>
+        </div>
+    </li>
+</ul>
+
         $html
 </body>
 </html>

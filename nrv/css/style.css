@@ -1,25 +1,41 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. Applique overflow-x: hidden seulement à body */
+body {
+    overflow-x: hidden; /* Cela va empêcher le scroll horizontal global */
+}
+
 .box {
+    margin-top: 5%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
+    grid-gap: 100px;
 }
 
 .items {
     background-color: rgb(244, 244, 244);
     padding: 20px;
-    border: 1px solid #24308c;
+    border: 1px solid;
+    border-color: rgb(46, 12, 77);
+    background: linear-gradient(pink,rgb(63, 4, 46));
     border-width: 10px;
-    border-radius: 1em;
+    border-radius: 40px;
     color: black;
     text-align: center;
-    box-sizing: border-box;  
+    margin: 0.5em;
+ 
 }
+
 
 .items img {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     height: 55vh;
+    border-radius: 1em;
 }
 .items p {
     color:black;
@@ -27,5 +43,66 @@
 
 .mon-titre, .description-titre {
     color: black;
+}
+.spectacle{
+    margin-top: 25px;
+}
+/* Barre de navigation principale */
+#nav {
+    list-style-type: none;
+    margin: 0;
+    position: sticky;
+    top: 0;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    margin-bottom: 5%;
+    gap: 10%;
+    overflow: visible;
+    background-color: #1c021f;
+    display: flex;
+    width: 100%;  
+    font-size: 1.2em;
+}
+#categ{
+    flex: 1;
+}
+
+
+
+
+#nav > li > a, .dropbtn {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.categ-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Style des liens du sous-menu */
+.categ-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+/* Apparition du sous-menu au survol */
+.categ:hover .categ-content {
+    display: block;
+}
+
+/* Changement de couleur des liens du sous-menu au survol */
+.categ-content a:hover {
+    background-color: #ddd;
 }
 

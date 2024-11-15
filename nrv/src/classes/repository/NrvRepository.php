@@ -229,14 +229,7 @@ class NrvRepository{
         $stmt->execute();
 
     }
-    public function getIDSpectacleFromSpectacleSoiree(int $id_soiree):int{
-        $sql = "select ID_SPECTACLE from SOIREE_SPECTACLE where id_soiree = :ID_SOIREE";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':ID_SOIREE',$id_soiree);
-        $stmt->execute();
-        $infos = $stmt->fetchColumn();
-        return $infos;
-    }
+
     public function setStatusSpectacle(int $id_spectacle):void{
         $sql = "UPDATE SPECTACLE SET DESCRIPTION_SPECTACLE = '2E' where id_spectacle = :ID_SPECTACLE ";
         $stmt = $this->pdo->prepare($sql);
@@ -321,5 +314,24 @@ class NrvRepository{
         $artistes = $stmt->fetchAll();
         return $artistes;
     }
+
+    public function getSpectacleSoiree(int $idSoiree){
+        $sql = "select spectacle.id_spectacle from soiree_spectacle inner join spectacle on soiree_spectacle.id_spectacle = spectacle.id_spectacle
+        where id_soiree = ? order by horaire_spectacle";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(1,$idSoiree);
+        $stmt->execute();
+        $infos = $stmt->fetchAll();
+        return $infos;
+    }
+    public function getSoireeSpectacle(int $idSpectacle){
+        $sql = "select id_soiree from soiree_spectacle where ID_SPECTACLE = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(1,$idSpectacle);
+        $stmt->execute();
+        $infos = $stmt->fetchColumn();
+        return $infos;
+    }
+
 
 }
