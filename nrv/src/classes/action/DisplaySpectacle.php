@@ -29,10 +29,6 @@ class DisplaySpectacle extends Action
             $html.= $renderer->render(2);
             $html.="</br></br></div>";
 
-            $pl = new objets\ListePreference();
-            $html.=$pl->afficherListe($html);
-
-
         }
     return $html;
     }

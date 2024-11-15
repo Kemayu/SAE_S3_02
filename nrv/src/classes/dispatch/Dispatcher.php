@@ -60,6 +60,12 @@ class Dispatcher
             case 'modify-soiree':
                 $action = new act\ModifySoireeAction();
                 break;
+            case 'add-preference':
+                $action = new act\AddSpectaclePreference();
+                break;
+            case 'display-preference':
+                $action = new act\DisplayPreference();
+                break;
             default :
                 $action = new act\DefaultAction();
                 break;
@@ -111,6 +117,7 @@ class Dispatcher
         <li>-----------</li>
          <li><a href="?action=display-sorted">Afficher le programme de manière triée</a></li>
          <li><a href="?action=display-par">Afficher le programme de manière par..</a></li>
+         <li><a href="?action=display-preference">Afficher les preferences</a></li>
          
          
     </ul>
@@ -140,6 +147,8 @@ HEAD;
          <li>-----------</li>
          <li><a href="?action=display-sorted">Afficher le programme de manière triée</a></li>
          <li><a href="?action=display-par">Afficher le programme de manière par..</a></li>
+         <li>-----------</li>
+         <li><a href="?action=display-preference">Afficher les preferences</a></li>
          
          
     </ul>

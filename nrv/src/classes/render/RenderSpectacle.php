@@ -63,7 +63,7 @@ class RenderSpectacle implements renderer{
             $ensembleArtiste.= $artiste["nom_artiste"] . " - ";
         }
         
-        return "
+        return <<<END
         <div class = 'items'>
             <h3 id='mon-titre' aria-describedby='description-titre'>{$this->spec->titre} </h3>
             <P id='Artistes'> $ensembleArtiste</p>
@@ -74,8 +74,14 @@ class RenderSpectacle implements renderer{
 
             <iframe width='560' height='315' src='{$this->spec->extrait}' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>
 
-            
+            <form method="POST" action="?action=add-preference">
+            </select>
+            <input type="hidden" name="spectacle" value={$this->spec->id}>       
+            <button type="submit">Liker</button>
+            </form>
+
+
         </div>
-        ";
+        END;
     }
 }

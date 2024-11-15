@@ -333,19 +333,20 @@ class NrvRepository{
         //Pour la prochaine fois je dois surement faire en sorte que les utilisateur n'ont pas accès au modif dcp en vérifiant dans les classe action grace a cette fonction
     }
 
-
-
-
-    public function getArtistesSpectacle($id){
-        $stmt = $this ->pdo->prepare("select nom_artiste from Artiste inner join artiste_spectacle on artiste.id_artiste = artiste_spectacle.id_artiste
-        inner join spectacle on artiste_spectacle.id_spectacle = spectacle.id_spectacle where spectacle.id_spectacle = ?");
-        $stmt->bindParam(1,$id);
+    public function tryPreferenceExist(int $id_User, int $id_Spec): array
+    {
+        $sql ="SELECT * FROM UTILISATEUR_SPECTACLE WHERE ID_UTILISATEUR=:idUser AND ID_SPECTACLE=:idSpec";
+        $stmt = $this->pdo->prepare($sql);
+    
+        $stmt->bindParam(':idUser',$id_User);
+        $stmt->bindParam(':idSpec',$id_Spec);
+        
         $stmt->execute();
-        $artistes = $stmt->fetchAll();
-        return $artistes;
+        $spec = $stmt->fetchAll();
+        return $spec;
     }
 
-    public function addPreference(int $id_User,int $id_Spec):
+    public function addPreference(int $id_User,int $id_Spec): void
     {
         $sql ="insert into UTILISATEUR_SPECTACLE(ID_UTILISATEUR , ID_SPECTACLE) values(:idUser,:idSpec)";
         $stmt = $this->pdo->prepare($sql);
@@ -355,6 +356,16 @@ class NrvRepository{
         
         $stmt->execute();
     
+    }
+
+    public function getPreference(int $id_User):array{
+        $sql ="select ID_SPECTACLE from UTILISATEUR_SPECTACLE where ID_UTILISATEUR=:idUser";
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->bindParam(':idUser', $id_User);
+        $stmt->execute();
+        $spec = $stmt->fetchAll();
+        return $spec;
     }
 
 }
