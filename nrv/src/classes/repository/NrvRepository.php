@@ -415,4 +415,16 @@ class NrvRepository{
         return $spec;
     }
 
+    public function RemovePreference(int $id_User,int $id_Spec): void
+    {
+        $sql ="DELETE FROM UTILISATEUR_SPECTACLE WHERE ID_UTILISATEUR=:idUser AND ID_SPECTACLE=:idSpec";
+        $stmt = $this->pdo->prepare($sql);
+    
+        $stmt->bindParam(':idUser',$id_User);
+        $stmt->bindParam(':idSpec',$id_Spec);
+        
+        $stmt->execute();
+    
+    }
+
 }
