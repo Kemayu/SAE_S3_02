@@ -66,6 +66,9 @@ class Dispatcher
             case 'display-preference':
                 $action = new act\DisplayPreference();
                 break;
+            case 'remove-preference':
+                $action = new act\RemovePreference();
+                break;
             case 'add-organisator':
                 $action = new act\AddOrganisatorAction();
                 break;
