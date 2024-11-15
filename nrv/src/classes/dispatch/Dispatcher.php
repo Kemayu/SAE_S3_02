@@ -5,6 +5,7 @@ namespace iutnc\nrv\dispatch;
 
 use iutnc\nrv\action as act;
 use iutnc\nrv\auth\AuthnProvider;
+use iutnc\nrv\exception\AuthnException;
 
 //Classe dispatcher permettant de gerer les interactions avec le site
 class Dispatcher
@@ -63,15 +64,21 @@ class Dispatcher
                 $action = new act\DefaultAction();
                 break;
         }
-        $html = $action->execute();
-        if (AuthnProvider::getUserDroit() == 15) {
-            $this->renderPageAdmin($html);
-        }elseif(AuthnProvider::getUserDroit() == 50){
-            $this->renderPageAdmin($html);
-        }else{
-            $this->renderPageUtilisateur($html);
-        }
 
+        try {
+            $html = $action->execute();
+
+            if (AuthnProvider::getUserDroit() == 15) {
+                $this->renderPageAdmin($html);
+            }
+            elseif(AuthnProvider::getUserDroit() == 50) {
+                $this->renderPageAdmin($html);
+        }
+            elseif(AuthnProvider::getUserDroit() == 1) {
+                $this->renderPageUtilisateur($html);
+            }
+    }catch(AuthnException $e1){
+            $this->renderPageUtilisateur($html);}
     }
 
     //fonction permettant d'afficher la page web
