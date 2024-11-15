@@ -63,6 +63,9 @@ class Dispatcher
             case 'add-organisator':
                 $action = new act\AddOrganisatorAction();
                 break;
+            case 'remove-organisator':
+                $action = new act\RemoveOrganisatorAction();
+                break;
             default :
                 $action = new act\DefaultAction();
                 break;
@@ -99,7 +102,8 @@ class Dispatcher
     <h1>NRV</h1>
     <ul>
          <li><a href="?action=default">Accueil</a></li>
-          <li><a href="?action=add-organisator">Accueil</a></li>
+         <li><a href="?action=add-organisator">Ajouté un organisateur</a></li>
+         <li><a href="?action=remove-organisator">Retiré un organisateur</a></li>
          <li>-----------</li>
          <li><a href="?action=register">s'enregistrer</a></li>
          <li><a href="?action=signin">se connecter</a></li>
