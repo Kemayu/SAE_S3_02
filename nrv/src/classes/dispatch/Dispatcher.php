@@ -99,7 +99,7 @@ class Dispatcher
             $this->renderPageUtilisateur($html);}
     }
 
-    //fonction permettant d'afficher la page web
+    //fonction permettant d'afficher la page web d'un administrateur
     private function renderPageAdmin(string $html): void
     {
         echo <<<HEAD
@@ -160,6 +160,7 @@ class Dispatcher
 HEAD;
     }
 
+    //fonction permettant d'afficher la page web d'un organisateur
     private function renderPageOrganisator(string $html): void
     {
         echo <<<HEAD
@@ -198,6 +199,7 @@ HEAD;
             <div class="categ-content">
                 <a href="?action=display-sorted">Afficher de manière triée</a>
                 <a href="?action=display-par">Afficher de manière par...</a>
+                <a href="?action=display-soiree">Afficher une soiree</a>
                 <a href="?action=display-preference">Afficher mes préférences</a>
             </div>
         </li>
@@ -217,6 +219,7 @@ HEAD;
 HEAD;
     }
 
+    //fonction permettant d'afficher la page web d'un utilisateur
     private function renderPageUtilisateur(string $html): void
     {
         echo <<<HEAD
@@ -237,6 +240,7 @@ HEAD;
             <div class="categ-content">
                 <a href="?action=display-sorted">Afficher de manière triée</a>
                 <a href="?action=display-par">Afficher de manière par...</a>
+                <a href="?action=display-soiree">Afficher une soiree</a>
                 <a href="?action=display-preference">Afficher mes préférences</a>
             </div>
         </li>

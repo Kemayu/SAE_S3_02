@@ -47,12 +47,16 @@ class AuthnProvider
             throw new exception\AuthnException("email dangereux");
         }
         }
+
+        //fonction qui rend le mail de l'utilisateur si il est connecte
     public static function getSignInUser(): string{
         if (isset($_SESSION['user'])){
             return unserialize($_SESSION['user'])->email;
         }
         throw new exception\AuthnException("pas authentifié");
     }
+
+    //fonction qui donne le droit de l'utilisateur si il est connecte
     public static function getUserDroit(): string{
         if (isset($_SESSION['user'])){
             return unserialize($_SESSION['user'])->role;

@@ -4,6 +4,7 @@ namespace iutnc\nrv\action;
 use iutnc\nrv\repository\NrvRepository;
 use iutnc\nrv\auth as auth;
 
+//Classe pour gerer l'ajout d'un spectacle dans la liste de preference
 class AddSpectaclePreference extends Action
 {
     public function execute(): string

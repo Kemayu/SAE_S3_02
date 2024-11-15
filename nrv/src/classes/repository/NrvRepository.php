@@ -135,14 +135,14 @@ class NrvRepository{
         return $pgrm;
     }
 
-    public function recupAllLieux(){
+    public function recupAllLieux(): array{
         $stmt = $this ->pdo->prepare("select id_lieu,nom_lieu from Lieu");
         $stmt->execute();
         $lieux = $stmt->fetchAll();
         return $lieux;
     }
 
-    public function recupAllStyles(){
+    public function recupAllStyles(): array{
         $stmt = $this ->pdo->prepare("select style_musique from spectacle");
         $stmt->execute();
         $lieux = $stmt->fetchAll();
@@ -281,7 +281,7 @@ class NrvRepository{
         $stmt->execute();
     }
 
-    public function setUserRole($idUser, $role):void{
+    public function setUserRole(int $idUser, int $role):void{
         $sql ="
             UPDATE UTILISATEUR SET
                DROIT_UTILISATEUR = :role
@@ -347,13 +347,12 @@ class NrvRepository{
         $stmt->bindParam(':id',$id);
         $stmt->bindParam(':date',$date);
         $stmt->execute();
-        //Pour la prochaine fois je dois surement faire en sorte que les utilisateur n'ont pas accès au modif dcp en vérifiant dans les classe action grace a cette fonction
     }
 
 
 
 
-    public function getArtistesSpectacle($id){
+    public function getArtistesSpectacle($id): array{
         $stmt = $this ->pdo->prepare("select nom_artiste from Artiste inner join artiste_spectacle on artiste.id_artiste = artiste_spectacle.id_artiste
         inner join spectacle on artiste_spectacle.id_spectacle = spectacle.id_spectacle where spectacle.id_spectacle = ?");
         $stmt->bindParam(1,$id);
@@ -362,7 +361,7 @@ class NrvRepository{
         return $artistes;
     }
 
-    public function getSpectacleSoiree(int $idSoiree){
+    public function getSpectacleSoiree(int $idSoiree): array{
         $sql = "select spectacle.id_spectacle from soiree_spectacle inner join spectacle on soiree_spectacle.id_spectacle = spectacle.id_spectacle
         where id_soiree = ? order by horaire_spectacle";
         $stmt = $this->pdo->prepare($sql);
@@ -371,7 +370,7 @@ class NrvRepository{
         $infos = $stmt->fetchAll();
         return $infos;
     }
-    public function getSoireeSpectacle(int $idSpectacle){
+    public function getSoireeSpectacle(int $idSpectacle): int{
         $sql = "select id_soiree from soiree_spectacle where ID_SPECTACLE = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindParam(1,$idSpectacle);

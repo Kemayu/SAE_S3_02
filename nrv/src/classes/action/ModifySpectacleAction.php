@@ -6,6 +6,7 @@ use iutnc\nrv\auth\AuthnProvider;
 use iutnc\nrv\exception\AuthnException;
 use iutnc\nrv\repository\NrvRepository;
 
+//Classe pour gerer la modification d'un spectacle
 class ModifySpectacleAction extends Action
 {
     public function execute(): string

@@ -6,7 +6,7 @@ use iutnc\nrv\render as render;
 use iutnc\nrv\auth as auth;
 use iutnc\nrv\exception as exception;
 use iutnc\nrv\objets as objets;
-//Classe pour gerer l'affichage d'une playlist
+//Classe pour gerer l'affichage d'une liste de preference
 class DisplayPreference extends Action
 {
 
