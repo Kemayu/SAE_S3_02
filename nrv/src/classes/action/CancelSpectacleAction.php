@@ -2,17 +2,26 @@
 
 namespace iutnc\nrv\action;
 
+use iutnc\nrv\auth\AuthnProvider;
+use iutnc\nrv\exception\AuthnException;
 use iutnc\nrv\repository\NrvRepository;
 
 class CancelSpectacleAction extends Action
 {
     public function execute(): string
     {
-        if (NrvRepository::getInstance()->getNbSpectaclePasAnnule() === 0) {
-            return "Tous les spectacles sont annulés";
+        try {
+            AuthnProvider::getSignInUser();
+        } catch (AuthnException $e) {
+            return "<h3>Pas authentifier</h3>";
         }
 
-        else if ($this->http_method === 'GET') {
+        if (AuthnProvider::getUserDroit() == 1) {
+            return "<h3>Vous n'avez pas accès a la création de la soirée !</h3>";
+        }
+        if (NrvRepository::getInstance()->getNbSpectaclePasAnnule() === 0) {
+            return "Tous les spectacles sont annulés";
+        } else if ($this->http_method === 'GET') {
 
             $html = <<<END
             <form method = "post" action = "?action=cancel-spectacle"><br>
