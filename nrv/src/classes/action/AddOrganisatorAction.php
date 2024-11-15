@@ -16,7 +16,7 @@ class AddOrganisatorAction extends Action
             return "<h3>Pas authentifier</h3>";
         }
 
-        if (AuthnProvider::getUserDroit() == 1 && AuthnProvider::getUserDroit() == 15) {
+        if (AuthnProvider::getUserDroit() == 1 || AuthnProvider::getUserDroit() == 15) {
             return "<h3>Vous n'avez pas accès a l'ajout d'organisateur !</h3>";
         }
 
