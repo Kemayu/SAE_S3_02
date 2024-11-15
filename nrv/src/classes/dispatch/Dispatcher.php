@@ -60,6 +60,12 @@ class Dispatcher
             case 'modify-soiree':
                 $action = new act\ModifySoireeAction();
                 break;
+            case 'add-preference':
+                $action = new act\AddSpectaclePreference();
+                break;
+            case 'display-preference':
+                $action = new act\DisplayPreference();
+                break;
             case 'add-organisator':
                 $action = new act\AddOrganisatorAction();
                 break;

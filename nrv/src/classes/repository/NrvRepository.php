@@ -381,5 +381,39 @@ class NrvRepository{
         return $infos;
     }
 
+    public function tryPreferenceExist(int $id_User, int $id_Spec): array
+    {
+        $sql ="SELECT * FROM UTILISATEUR_SPECTACLE WHERE ID_UTILISATEUR=:idUser AND ID_SPECTACLE=:idSpec";
+        $stmt = $this->pdo->prepare($sql);
+    
+        $stmt->bindParam(':idUser',$id_User);
+        $stmt->bindParam(':idSpec',$id_Spec);
+        
+        $stmt->execute();
+        $spec = $stmt->fetchAll();
+        return $spec;
+    }
+
+    public function addPreference(int $id_User,int $id_Spec): void
+    {
+        $sql ="insert into UTILISATEUR_SPECTACLE(ID_UTILISATEUR , ID_SPECTACLE) values(:idUser,:idSpec)";
+        $stmt = $this->pdo->prepare($sql);
+    
+        $stmt->bindParam(':idUser',$id_User);
+        $stmt->bindParam(':idSpec',$id_Spec);
+        
+        $stmt->execute();
+    
+    }
+
+    public function getPreference(int $id_User):array{
+        $sql ="select ID_SPECTACLE from UTILISATEUR_SPECTACLE where ID_UTILISATEUR=:idUser";
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->bindParam(':idUser', $id_User);
+        $stmt->execute();
+        $spec = $stmt->fetchAll();
+        return $spec;
+    }
 
 }
