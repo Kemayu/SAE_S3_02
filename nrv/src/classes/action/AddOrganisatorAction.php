@@ -6,6 +6,7 @@ use iutnc\nrv\auth\AuthnProvider;
 use iutnc\nrv\exception\AuthnException;
 use iutnc\nrv\repository\NrvRepository;
 
+//Classe pour gerer l'ajout d'un organisateur
 class AddOrganisatorAction extends Action
 {
     public function execute(): string

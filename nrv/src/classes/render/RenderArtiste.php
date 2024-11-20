@@ -8,7 +8,7 @@ class RenderArtiste implements renderer{
         $this->art= $art;
     }
 
-    public function render($type): string
+    public function render(int $type): string
     {
         return "
         <div>

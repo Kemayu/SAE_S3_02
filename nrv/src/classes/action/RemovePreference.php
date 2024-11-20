@@ -4,6 +4,7 @@ namespace iutnc\nrv\action;
 use iutnc\nrv\repository\NrvRepository;
 use iutnc\nrv\auth as auth;
 
+//Classe pour gerer la suppression d'un spectacle de la liste de preference
 class RemovePreference extends Action
 {
     public function execute(): string
